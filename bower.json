@@ -1,0 +1,26 @@
+{
+  "name": "GuateVuelos",
+  "version": "0.0.0",
+  "authors": [
+    "Jimmy Morales <jimmymorales26@gmail.com>"
+  ],
+  "description": "Travel Agency",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.21",
+    "bootstrap": "~3.2.0",
+    "angular-material": "~0.0.3",
+    "angular-route": "~1.2.25"
+  },
+  "resolutions": {
+    "angular": "^1.3.0-beta.18"
+  }
+}
