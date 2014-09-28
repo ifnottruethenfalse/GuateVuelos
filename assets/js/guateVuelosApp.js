@@ -162,6 +162,14 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
     });
   };*/
 }]);
+gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($scope,$materialDialog,$http){
+  $http.get(
+      'addairline'
+    ).then(function(response) {
+      $scope.airlines = response.data;
+    });
+
+}]);
 
 gvApp.factory('xml2json',function(){
   return {
