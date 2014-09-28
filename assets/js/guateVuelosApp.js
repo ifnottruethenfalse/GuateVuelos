@@ -166,7 +166,7 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
   };*/
 }]);
 gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($scope,$materialDialog,$http){
-  $http.get(
+  $http.post(
       'addairline'
     ).then(function(response) {
       $scope.airlines = response.data;

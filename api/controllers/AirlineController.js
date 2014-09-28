@@ -14,7 +14,7 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-
+var pg = require("pg");
 module.exports = {
     
   
