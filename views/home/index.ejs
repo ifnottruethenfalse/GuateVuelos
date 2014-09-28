@@ -20,7 +20,7 @@
    <material-tab ng-class="{active:selectedIndex == 3}" label="Tours"></material-tab>
    <material-tab ng-class="{active:selectedIndex == 4}" label="Autos"></material-tab>
    <material-tab ng-class="{active:selectedIndex == 5}" label="Contacto"></material-tab>
-   <material-tab ng-show="!user.superuser" ng-class="{active:selectedIndex == 6}" label="Configurar"></material-tab>
+   <material-tab ng-show="user.superuser" ng-class="{active:selectedIndex == 6}" label="Configurar"></material-tab>
  </material-tabs>
  <material-content ng-class="{tab1:selectedIndex == 0,tab2:selectedIndex == 1,tab3:selectedIndex == 2,tab4:selectedIndex == 3,tab5:selectedIndex == 4,tab6:selectedIndex == 5}" class="animate-switch-container" ng-switch on="selectedIndex" flex>
     <div class="animate-switch" ng-switch-when="0" layout="horizontal"  ng-controller="billetCtrl" flex>

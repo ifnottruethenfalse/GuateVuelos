@@ -182,7 +182,7 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
         $scope.close = function() {
           $hideDialog();
         };
-        $scope.login = function () {
+        $scope.add = function () {
           if($scope.addAirline.$valid) {
             var params = {
               codigo: $scope.codigo, 
@@ -196,7 +196,7 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
             ).then(function(response) {
               console.log(response);
               var airline = response.data;
-              if (user.state == 0) {
+              if (airline.state == 0) {
                 $scope.wrongCode = true;
               } else {
                 $rootScope.$broadcast('newAirline',airline);
