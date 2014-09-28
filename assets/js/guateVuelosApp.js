@@ -5,6 +5,13 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
   $scope.user={
     login:false    
   };
+  $scope.xml=true;
+  Date.prototype.yyyymmdd = function() {
+   var yyyy = this.getFullYear().toString();
+   var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+   var dd  = this.getDate().toString();
+   return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
+  };
   /*var params = {address: "guate", sensor: false};
   $http.get(
       'http://maps.googleapis.com/maps/api/geocode/xml',
@@ -94,6 +101,19 @@ gvApp.controller("billetCtrl",['$scope','$http', function ($scope,$http){
   $scope.onSearch = false;
   $scope.searchFlight = function() {  
     $scope.onSearch = true;
+    var fecha = $scope.fecha.yyyymmdd();
+    var params = {
+      origen: $scope.origen, 
+      destino: $scope.destino,
+      fecha: fecha,
+      xml: $scope.xml
+    };
+    return $http.post(
+      '/searchflight',
+      {params: params}
+    ).then(function(response) {
+      $scope.onSearch = false;
+    });
   };
   
   /*$scope.disabled = undefined;
