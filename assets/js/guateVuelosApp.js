@@ -174,7 +174,7 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
     $materialDialog({
       templateUrl: 'partials/addAirline.html',
       targetEvent: e,
-      controller: ['$scope', '$hideDialog','$http', function($scope, $hideDialog, $http) {
+      controller: ['$scope', '$hideDialog','$http','$rootScope', function($scope, $hideDialog, $http,$rootScope) {
         $scope.close = function() {
           $hideDialog();
         };
