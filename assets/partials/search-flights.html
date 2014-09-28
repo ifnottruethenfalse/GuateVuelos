@@ -3,13 +3,12 @@
     <material-linear-progress ng-if="onSearch" style="margin-top: 30px;" mode="indeterminate"></material-linear-progress>
     <material-list>
 
-      <material-item ng-repeat="item in todos">
+      <material-item ng-repeat="flightList in flightLists">
         <material-item-content>
           <div class="material-tile-left">
-              <img ng-src="{{item.face}}" class="face" alt="{{item.who}}">
+              <h2>{{flighList.aereolinea}}</h2>
           </div>
-          <div class="material-tile-content">
-            <h2>{{item.what}}</h2>
+          <div class="material-tile-content" ng-repeat="">
             <h3>{{item.who}}</h3>
             <p>
               {{item.notes}}
@@ -17,5 +16,6 @@
           </div>
         </material-item-content>
       </material-item>
+    </material-list>
   </div>
 </material-dialog>  
