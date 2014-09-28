@@ -1,12 +1,12 @@
 /*Script*/
 
 CREATE TABLE USUARIOS(
-	nit integer,
+	nit char(20),
 	usuario char(20),
 	password char(20),
 	nombre char(20),
 	apellido char(20),
-	numeropasaporte char(20) UNIQUE,
+	numeropasaporte char(20),
 	tarjetadecredito char(20),
 	correoelectronico char(20),
 	superuser boolean,
@@ -46,14 +46,16 @@ CREATE TABLE BOLETO(
 );
 
 CREATE TABLE COMPRAS(
-	numeropasaporte char(20),
+	usuario char(20),
 	numeroboleto int,
 	codigo char(10),
 	fecha char(20),
-	PRIMARY KEY(numeroboleto, numeropasaporte),
-	FOREIGN KEY(numeropasaporte) REFERENCES USUARIOS(numeropasaporte)
+	PRIMARY KEY(numeroboleto, usuario),
+	FOREIGN KEY(usuario) REFERENCES USUARIOS(usuario)
 	ON DELETE CASCADE,
 	FOREIGN KEY(numeroboleto, codigo) REFERENCES BOLETO(numeroboleto, codigo)
 	ON DELETE CASCADE
 
 );
+
+INSERT INTO usuarios VALUES(0,'superuser','cris12345','cristhian','morales','1234567890','0123456789012345','cristhian@gmail.com',true) /* Para ingresar el superuser*/
