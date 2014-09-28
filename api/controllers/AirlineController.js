@@ -74,7 +74,7 @@ module.exports = {
            res.json({state:0});
         }
         else{
-          var query = client.query("INSERT INTO AEROLINEAS VALUES('"+info.codigo+"','"+info.nombre+"','"+info.host+"', '"+info.ext+"';", function(err, result) {
+          var query = client.query("INSERT INTO AEROLINEAS VALUES('"+info.codigo+"','"+info.nombre+"','"+info.host+"', '"+info.ext+"');", function(err, result) {
             if(err) {
               return console.error('error running query', err);
             }

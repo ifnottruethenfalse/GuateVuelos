@@ -58,7 +58,6 @@ module.exports = {
         }
         else{
             info.state = 200;
-            console.log(result.rows[0]);
             info.superuser = result.rows[0].superuser;
             info.name = result.rows[0].nombre;
             info.lastName = result.rows[0].apellido;
@@ -67,7 +66,6 @@ module.exports = {
             info.tarjeta= result.rows[0].tarjetadecredito;
             info.documento = result.rows[0].numeropasaporte;
             info.nit = result.rows[0].nit;
-            console.log(info);
             res.send(info);
         }
         //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
