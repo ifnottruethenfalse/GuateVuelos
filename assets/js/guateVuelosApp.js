@@ -170,6 +170,9 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
   $scope.$on('newAirline',function(event,airline){
     $scope.airlines.push(airline);
   });
+  $scope.$on('newAirlines',function(event,airlines){
+    $scope.airlines = airlines;
+  });
   $scope.add = function (e) {
     $materialDialog({
       templateUrl: 'partials/addAirline.html',
@@ -198,6 +201,43 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
                 $rootScope.$broadcast('newAirline',airline);
                 $hideDialog();
               } 
+            });
+          }
+        }
+      }]
+    });
+  }
+  $scope.edit = function (e,airline) {
+    $materialDialog({
+      templateUrl: 'partials/editAirline.html',
+      targetEvent: e,
+      locals: {
+        airline: airline
+      }
+      controller: ['$scope', '$hideDialog','$http','$rootScope','airline', function($scope, $hideDialog, $http,$rootScope,airline) {
+        $scope.codigo = airline.codigo;
+        $scope.nombre = airline.nombre;
+        $scope.host = airline.host;
+        $scope.ext = airline.ext;
+        $scope.close = function() {
+          $hideDialog();
+        };
+        $scope.edit = function () {
+          if($scope.editAirline.$valid) {
+            var params = {
+              codigo: $scope.codigo, 
+              nombre: $scope.nombre,
+              host: $scope.host,
+              ext: $scope.ext
+            };
+            $http.post(
+              '/editairline',
+              {params: params}
+            ).then(function(response) {
+              console.log(response);
+              var airlines = response.data;
+              $rootScope.$broadcast('newAirlines',airlines);
+              $hideDialog();
             });
           }
         }
