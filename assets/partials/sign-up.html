@@ -1,0 +1,51 @@
+<material-dialog>
+  <div class="dialog-content">
+    <form style="padding-left: 20px;" name="signUp">
+      {{signUp.$invalid}}
+      <material-input-group class="material-input-group-theme-light">
+        <label for="user">Username</label>
+        <material-input id="user" name="user" type="text" ng-model="username" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group class="material-input-group-theme-light">
+        <label for="pw">Password</label>
+        <material-input id="pw" name="password" type="password" ng-model="password" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group class="material-input-group-theme-light">
+        <label for="pw2">Repetir Password</label>
+        <material-input id="pw2" name="password2" type="password" ng-model="password2" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group class="material-input-group-theme-light">
+        <label for="nombre">Nombre</label>
+        <material-input id="nombre" name="nombre" type="text" ng-model="nombre" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group class="material-input-group-theme-light">
+        <label for="apellido">Apellido</label>
+        <material-input id="apellido" name="apellido" type="text" ng-model="apellido" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group class="material-input-group-theme-light">
+        <label for="email">Email</label>
+        <material-input id="email" name="email" type="email" ng-model="email" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group class="material-input-group-theme-light">
+        <label for="ddv">Documento de Viaje</label>
+        <material-input id="ddv" name="ddv" type="text" ng-model="ddv" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group class="material-input-group-theme-light">
+        <label for="nit">NIT</label>
+        <material-input id="nit" name="nit" type="text" ng-model="nit" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group class="material-input-group-theme-light">
+        <label for="tdc">Tarjeta de Credito</label>
+        <material-input id="tdc" name="tdc" type="text" ng-model="tdc" style="width:100%;" required>
+      </material-input-group>
+    </form>
+  </div>
+  <div class="dialog-actions" layout="horizontal" layout-align="end">
+    <material-button class="material-button-raised" style="margin-right:20px;" ng-click="close()">
+      Cancelar
+    </material-button>
+    <material-button class="material-button-raised  material-button-colored"  ng-click="save()">
+      Save
+    </material-button>
+  </div>
+</material-dialog>
