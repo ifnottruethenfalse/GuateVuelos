@@ -260,23 +260,21 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
           $hideDialog();
         };
         $scope.delete = function () {
-          if($scope.editAirline.$valid) {
-            var params = {
-              codigo: $scope.codigo, 
-              nombre: $scope.nombre,
-              host: $scope.host,
-              ext: $scope.ext
-            };
-            $http.post(
-              '/deleteairline',
-              {params: params}
-            ).then(function(response) {
-              console.log(response);
-              var airlines = response.data;
-              $rootScope.$broadcast('newAirlines',airlines);
-              $hideDialog();
-            });
-          }
+          var params = {
+            codigo: $scope.codigo, 
+            nombre: $scope.nombre,
+            host: $scope.host,
+            ext: $scope.ext
+          };
+          $http.post(
+            '/deleteairline',
+            {params: params}
+          ).then(function(response) {
+            console.log(response);
+            var airlines = response.data;
+            $rootScope.$broadcast('newAirlines',airlines);
+            $hideDialog();
+          });
         }
       }]
     });
