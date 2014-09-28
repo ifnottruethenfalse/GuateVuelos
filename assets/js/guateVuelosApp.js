@@ -213,7 +213,7 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
       targetEvent: e,
       locals: {
         airline: airline
-      }
+      },
       controller: ['$scope', '$hideDialog','$http','$rootScope','airline', function($scope, $hideDialog, $http,$rootScope,airline) {
         $scope.codigo = airline.codigo;
         $scope.nombre = airline.nombre;
@@ -250,7 +250,7 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
       targetEvent: e,
       locals: {
         airline: airline
-      }
+      },
       controller: ['$scope', '$hideDialog','$http','$rootScope','airline', function($scope, $hideDialog, $http,$rootScope,airline) {
         $scope.codigo = airline.codigo;
         $scope.nombre = airline.nombre;
