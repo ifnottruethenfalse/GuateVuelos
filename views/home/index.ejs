@@ -1,0 +1,144 @@
+<material-toolbar>
+
+    <div class="material-toolbar-tools">
+      <span>Guate Vuelos</span>
+
+      <!-- fill up the space between left and right area -->
+      <span flex></span>
+       <span ng-show="user.login">Welcome {{user.name}}</span>
+      <material-button ng-show="user.login" class="material-button-raised signUp" style=" background-color: #91a7ea;" >Configurar</material-button>
+      <material-button ng-show="user.login" class="material-button-raised signUp" style=" background-color: #91a7ea;" >Cerrar Sesion</material-button>
+      <material-button ng-hide="user.login" class="material-button-raised material-button-colored" ng-click="signIn($event)">Iniciar Sesion</material-button>
+      <material-button ng-hide="user.login" class="material-button-raised signUp" style=" background-color: #91a7ea;" ng-click="signUp($event)">Registrarse</material-button>
+    </div>
+
+  </material-toolbar>
+  <material-tabs selected="selectedIndex" center>
+   <material-tab ng-class="{active:selectedIndex == 0}" label="Boletos"></material-tab>
+   <material-tab ng-class="{active:selectedIndex == 1}" label="Paquetes"></material-tab>
+   <material-tab ng-class="{active:selectedIndex == 2}" label="Hoteles"></material-tab>
+   <material-tab ng-class="{active:selectedIndex == 3}" label="Tours"></material-tab>
+   <material-tab ng-class="{active:selectedIndex == 4}" label="Autos"></material-tab>
+   <material-tab ng-class="{active:selectedIndex == 5}" label="Contacto"></material-tab>
+   <material-tab ng-show="user.superuser" ng-class="{active:selectedIndex == 6}" label="Configurar"></material-tab>
+ </material-tabs>
+ <material-content ng-class="{tab1:selectedIndex == 0,tab2:selectedIndex == 1,tab3:selectedIndex == 2,tab4:selectedIndex == 3,tab5:selectedIndex == 4,tab6:selectedIndex == 5}" class="animate-switch-container" ng-switch on="selectedIndex" ng-controller="billetCtrl" flex>
+    <div class="animate-switch" ng-switch-when="0" layout="horizontal" flex>
+      <div flex="25" layout="vertical" >
+        <material-card style="background-color: #65afff;">
+          <h2>Ofertas de Aereos</h2>
+          <table>
+            <tr class="tableHead">
+              <td>Destino</td>
+              <td>Precio</td>
+            </tr>
+            <tr>
+              <td>Guate</td>
+              <td>500.00</td>
+            </tr>
+            <tr>
+              <td>Guate</td>
+              <td>500.00</td>
+            </tr>
+            <tr>
+              <td>Guate</td>
+              <td>500.00</td>
+            </tr>
+            <tr>
+              <td>Guate</td>
+              <td>500.00</td>
+            </tr>
+          </table>
+        </material-card>
+        <material-card style="background-color: #65afff;">
+          <h2>Paquetes en Oferta</h2>
+          <table>
+            <tr class="tableHead">
+              <td>Destino</td>
+              <td>Desde</td>
+            </tr>
+            <tr>
+              <td>Guate</td>
+              <td>500.00</td>
+            </tr>
+            <tr>
+              <td>Guate</td>
+              <td>500.00</td>
+            </tr>
+            <tr>
+              <td>Guate</td>
+              <td>500.00</td>
+            </tr>
+            <tr>
+              <td>Guate</td>
+              <td>500.00</td>
+            </tr>
+          </table>
+        </material-card>
+      </div>
+      <material-card style="background-color: #65afff;width: 100%;height:340px;">
+        <h2>Busca Tu Vuelo</h2>
+        <form style="padding-left: 20px;" name="search">
+          
+          <!--<ui-select ng-model="address.selected"
+             theme="select2"
+             ng-disabled="disabled"
+             reset-search-input="false"
+             style="width: 300px;">
+            <ui-select-match placeholder="Origen...">{{$select.selected.formatted_address}}</ui-select-match>
+            <ui-select-choices repeat="address in addresses track by $index"
+                     refresh="refreshAddresses($select.search)"
+                     refresh-delay="0">
+              <div ng-bind-html="address.formatted_address | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+          <ui-select ng-model="address.selected"
+             theme="select2"
+             ng-disabled="disabled"
+             reset-search-input="false"
+             style="width: 300px;">
+            <ui-select-match placeholder="Destino...">{{$select.selected.formatted_address}}</ui-select-match>
+            <ui-select-choices repeat="address in addresses track by $index"
+                     refresh="refreshAddresses($select.search)"
+                     refresh-delay="0">
+              <div ng-bind-html="address.formatted_address | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>-->
+          <material-input-group class="material-input-group-theme-light material-input-group-inverted">
+            <label for="origen" style="color:white;">Desde</label>
+            <material-input id="origen" name="origen" type="text" ng-model="origen" style="width:100%;" required>
+          </material-input-group>
+          <material-input-group class="material-input-group-theme-light material-input-group-inverted">
+            <label for="destino" style="color:white;">Hacia</label>
+            <material-input id="destino" name="destino" type="text" ng-model="destino" style="width:100%;" required>
+          </material-input-group>
+          <material-input-group class="material-input-group-theme-light material-input-group-inverted" ng-class="{'material-input-has-value':fecha}">
+            <material-input name="fecha" id="fecha" ui-date="{minDate:0}" ui-date-format="mm/dd/yy" type="text" ng-model="fecha" style="width:100%;margin-top: 20px;" placeholder="Fecha" ng-required="true">
+          </material-input-group>
+          <material-linear-progress ng-if="onSearch" style="margin-top: 30px;" mode="indeterminate"></material-linear-progress>
+          <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-disabled="search.$error.required || search.fecha.$error.required" ng-click="searchFlight()">Buscar</material-button>
+        </form>
+      </material-card>
+    </div>
+    <div class="animate-switch" ng-switch-when="1">
+      {{selectedIndex}}
+    </div>
+    <div class="animate-switch" ng-switch-when="2">
+      {{selectedIndex}}
+    </div>
+    <div class="animate-switch" ng-switch-when="3">
+      {{selectedIndex}}
+    </div>
+    <div class="animate-switch" ng-switch-when="4">
+      {{selectedIndex}}
+    </div>
+    <div class="animate-switch" ng-switch-when="5">
+      {{selectedIndex}}
+    </div>
+    <div class="animate-switch" ng-switch-when="6">
+      {{selectedIndex}}
+    </div>
+    
+    
+  </material-content>
+

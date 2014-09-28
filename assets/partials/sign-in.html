@@ -1,0 +1,23 @@
+<material-dialog>
+  <div class="dialog-content">
+    <form style="padding-left: 20px;" name="signUp" id="signUp">
+      <span ng-show="wrongUsername" style="color:red;">Usuario o Password Incorrecto</span>
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.user.$dirty && signUp.user.$invalid}" class="material-input-group-theme-light">
+        <label for="user">Username</label>
+        <material-input id="user" name="user" type="text" ng-model="username" style="width:100%;" ng-pattern="/^[a-z0-9_-]{3,16}$/" required>
+      </material-input-group>
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.password.$dirty && signUp.password.$invalid}" class="material-input-group-theme-light">
+        <label for="pw">Password</label>
+        <material-input id="pw" name="password" type="password" ng-model="password" style="width:100%;" ng-pattern="/^[a-z0-9_-]{6,18}$/" required>
+      </material-input-group>
+    </form>
+  </div>
+  <div class="dialog-actions" layout="horizontal" layout-align="end">
+    <material-button class="material-button-raised" style="margin-right:20px;" ng-click="close()">
+      Cancelar
+    </material-button>
+    <material-button class="material-button-raised  material-button-colored"  ng-click="login()">
+      Iniciar
+    </material-button>
+  </div>
+</material-dialog>

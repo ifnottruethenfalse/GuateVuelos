@@ -1634,7 +1634,7 @@ material-button {
     background-color: #e4e4e4; }
   material-button .material-button-inner {
     position: absolute;
-    opacity: 0;
+    opacity: 1;
     left: 0;
     top: 0;
     margin: 0;
@@ -2574,7 +2574,7 @@ material-button {
     background-color: #e4e4e4; }
   material-button .material-button-inner {
     position: absolute;
-    opacity: 0;
+    opacity: 1;
     left: 0;
     top: 0;
     margin: 0;
@@ -2689,9 +2689,9 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
 input, textarea {
   background: none; }
   input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-    color: #a4a4a4; }
+    color: white; }
   input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-    color: #a4a4a4; }
+    color: white; }
 
 material-custom-input-group, .material-custom-input-group {
   margin: 10px 0 10px 0;
