@@ -28,7 +28,7 @@
       </material-input-group>
       <material-input-group ng-class="{'material-input-group-theme-red':signUp.nit.$dirty && signUp.nit.$invalid}" class="material-input-group-theme-light">
         <label for="nit">NIT</label>
-        <material-input id="nit" name="nit" type="text" ng-model="nit" style="width:100%;" required>
+        <material-input id="nit" name="nit" type="text" ng-model="nit" style="width:100%;" ng-pattern="/^[0-9]{1,20}$/" required>
       </material-input-group>
       <material-input-group ng-class="{'material-input-group-theme-red':signUp.tdc.$dirty && signUp.tdc.$invalid}" class="material-input-group-theme-light">
         <label for="tdc">Tarjeta de Credito</label>

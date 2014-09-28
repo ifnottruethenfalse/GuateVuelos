@@ -62,7 +62,7 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
     $materialDialog({
       templateUrl: 'partials/sign-in.html',
       targetEvent: e,
-      controller: ['$scope', '$hideDialog','$http', function($scope, $hideDialog, $http) {
+      controller: ['$scope', '$hideDialog','$http','$rootScope', function($scope, $hideDialog, $http,$rootScope) {
         $scope.close = function() {
           $hideDialog();
         };
@@ -82,6 +82,7 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
               } else {
                 user.login = true;
                 $rootScope.$broadcast('user',user);
+                $hideDialog();
               } 
             });
           }
