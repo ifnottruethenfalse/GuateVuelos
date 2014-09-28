@@ -23,7 +23,8 @@
     "jquery": "~2.1.1",
     "angular-ui-select": "~0.7.0",
     "select2": "~3.4.5",
-    "angular-sanitize": "~1.2.25"
+    "angular-sanitize": "~1.2.25",
+    "angular-ui-utils": "bower-mask"
   },
   "resolutions": {
     "angular": "^1.3.0-beta.18"

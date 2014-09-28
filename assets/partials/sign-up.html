@@ -1,42 +1,38 @@
 <material-dialog>
   <div class="dialog-content">
-    <form style="padding-left: 20px;" name="signUp">
-      {{signUp.$invalid}}
-      <material-input-group class="material-input-group-theme-light">
+    <form style="padding-left: 20px;" name="signUp" id="signUp">
+      <span ng-show="wrongUsername" style="color:red;">Usuario Ya Existe</span>
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.user.$dirty && signUp.user.$invalid}" class="material-input-group-theme-light">
         <label for="user">Username</label>
-        <material-input id="user" name="user" type="text" ng-model="username" style="width:100%;" required>
+        <material-input id="user" name="user" type="text" ng-model="username" style="width:100%;" ng-pattern="/^[a-z0-9_-]{3,16}$/" required>
       </material-input-group>
-      <material-input-group class="material-input-group-theme-light">
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.password.$dirty && signUp.password.$invalid}" class="material-input-group-theme-light">
         <label for="pw">Password</label>
-        <material-input id="pw" name="password" type="password" ng-model="password" style="width:100%;" required>
+        <material-input id="pw" name="password" type="password" ng-model="password" style="width:100%;" ng-pattern="/^[a-z0-9_-]{6,18}$/" required>
       </material-input-group>
-      <material-input-group class="material-input-group-theme-light">
-        <label for="pw2">Repetir Password</label>
-        <material-input id="pw2" name="password2" type="password" ng-model="password2" style="width:100%;" required>
-      </material-input-group>
-      <material-input-group class="material-input-group-theme-light">
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.nombre.$dirty && signUp.nombre.$invalid}" class="material-input-group-theme-light">
         <label for="nombre">Nombre</label>
-        <material-input id="nombre" name="nombre" type="text" ng-model="nombre" style="width:100%;" required>
+        <material-input id="nombre" name="nombre" type="text" ng-model="nombre" style="width:100%;" ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/" required>
       </material-input-group>
-      <material-input-group class="material-input-group-theme-light">
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.apellido.$dirty && signUp.apellido.$invalid}" class="material-input-group-theme-light">
         <label for="apellido">Apellido</label>
-        <material-input id="apellido" name="apellido" type="text" ng-model="apellido" style="width:100%;" required>
+        <material-input id="apellido" name="apellido" type="text" ng-model="apellido" style="width:100%;" ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/" required>
       </material-input-group>
-      <material-input-group class="material-input-group-theme-light">
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.email.$dirty && signUp.email.$invalid}" class="material-input-group-theme-light">
         <label for="email">Email</label>
         <material-input id="email" name="email" type="email" ng-model="email" style="width:100%;" required>
       </material-input-group>
-      <material-input-group class="material-input-group-theme-light">
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.ddv.$dirty && signUp.ddv.$invalid}" class="material-input-group-theme-light">
         <label for="ddv">Documento de Viaje</label>
         <material-input id="ddv" name="ddv" type="text" ng-model="ddv" style="width:100%;" required>
       </material-input-group>
-      <material-input-group class="material-input-group-theme-light">
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.nit.$dirty && signUp.nit.$invalid}" class="material-input-group-theme-light">
         <label for="nit">NIT</label>
         <material-input id="nit" name="nit" type="text" ng-model="nit" style="width:100%;" required>
       </material-input-group>
-      <material-input-group class="material-input-group-theme-light">
+      <material-input-group ng-class="{'material-input-group-theme-red':signUp.tdc.$dirty && signUp.tdc.$invalid}" class="material-input-group-theme-light">
         <label for="tdc">Tarjeta de Credito</label>
-        <material-input id="tdc" name="tdc" type="text" ng-model="tdc" style="width:100%;" required>
+        <material-input id="tdc" name="tdc" type="text" ng-model="tdc" style="width:100%;" ui-mask="9999 9999 9999 9999" required>
       </material-input-group>
     </form>
   </div>
@@ -45,7 +41,7 @@
       Cancelar
     </material-button>
     <material-button class="material-button-raised  material-button-colored"  ng-click="save()">
-      Save
+      Guardar
     </material-button>
   </div>
 </material-dialog>
