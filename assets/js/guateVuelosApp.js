@@ -76,6 +76,7 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
               '/signin',
               {params: params}
             ).then(function(response) {
+              console.log(response);
               var user = response.data;
               if (user.state == 0) {
                 $scope.wrongUsername = true;
