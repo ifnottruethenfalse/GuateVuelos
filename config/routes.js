@@ -38,7 +38,8 @@ module.exports.routes = {
   'post /signup': 'UserController.signup',
   'post /signin': 'UserController.signin',
   'post /searchflight': 'FlightController.search',
-  'post /addairline' : 'AirlineController.getairlines'
+  'post /getairline' : 'AirlineController.getairlines',
+  'post /addairline' : 'AirlineController.add'
 
   /*
   // But what if you want your home page to display
