@@ -6,9 +6,9 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
     login:false    
   };
   $scope.xml=true;
-  $scope.$on('user',function(user){
+  $scope.$on('user',function(event,user){
     $scope.user = user;
-    console.log("holi");
+    console.log($scope.user);
   });
   /*var params = {address: "guate", sensor: false};
   $http.get(
@@ -44,11 +44,13 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
               {params: params}
             ).then(function(response) {
               var user = response.data;
+              console.log(user);
               if (user.state == 0) {
                 $scope.wrongUsername = true;
               } else {
                 user.login = true;
                 $rootScope.$broadcast('user',user);
+                $hideDialog();
               } 
             });
           }
