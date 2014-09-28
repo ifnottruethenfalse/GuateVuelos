@@ -13,9 +13,9 @@ module.exports = {
    * `FlightController.search()`
    */
   search: function (req, res) {
-    return res.json({
-      todo: 'search() is not implemented yet!'
-    });
+    //return res.json({
+    //  todo: 'search() is not implemented yet!'
+    //});
   }
 };
 

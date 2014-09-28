@@ -115,8 +115,7 @@
           <material-input-group class="material-input-group-theme-light material-input-group-inverted" ng-class="{'material-input-has-value':fecha}">
             <material-input name="fecha" id="fecha" ui-date="{minDate:0}" type="text" ng-model="fecha" style="width:100%;margin-top: 20px;" placeholder="Fecha" ng-required="true">
           </material-input-group>
-          <material-linear-progress ng-if="onSearch" style="margin-top: 30px;" mode="indeterminate"></material-linear-progress>
-          <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-disabled="search.$error.required || search.fecha.$error.required" ng-click="searchFlight()">Buscar</material-button>
+          <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-disabled="search.$error.required || search.fecha.$error.required" ng-click="searchFlight($event)">Buscar</material-button>
         </form>
       </material-card>
     </div>
