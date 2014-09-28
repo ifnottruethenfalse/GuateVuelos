@@ -34,7 +34,12 @@ module.exports = {
         if(err) {
           return console.error('error running query', err);
         }
+        client.query("SELECT * FROM AEROLINEAS", function(err, result) {
+        if(err) {
+          return console.error('error running query', err);
+        }
         res.send(result.rows);
+        });
       });
     });
   },
@@ -45,11 +50,26 @@ module.exports = {
    *    `/airline/delete`
    */
    delete: function (req, res) {
-    
-    // Send a JSON response
-    return res.json({
-      hello: 'world'
+    var info = req.body.params;
+    var conString = "pg://postgres:cris12345@localhost:5432/GuateVuelos";
+    var client = new pg.Client(conString);
+    client.connect(function(err) {
+      if(err) {
+        return console.error('could not connect to postgres', err);
+      }
+      var query = client.query("DELETE FROM AEROLINEAS WHERE codigo='"+info.codigo+"'", function(err, result) {
+        if(err) {
+          return console.error('error running query', err);
+        }
+        client.query("SELECT * FROM AEROLINEAS", function(err, result) {
+        if(err) {
+          return console.error('error running query', err);
+        }
+        res.send(result.rows);
+        });
+      });
     });
+    
   },
 
 
@@ -78,7 +98,7 @@ module.exports = {
             if(err) {
               return console.error('error running query', err);
             }
-            res.send(result.rows[0]);
+            res.send(info);
           });
         }
       });
