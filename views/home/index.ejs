@@ -134,7 +134,7 @@
     <div class="animate-switch" ng-switch-when="5">
       {{selectedIndex}}
     </div>
-    <div class="animate-switch" ng-switch-when="6" ng-controller="superuserCtrl">
+    <div class="animate-switch" ng-switch-when="6" ng-controller="superuserCtrl" layout="vertical">
       <div layout="horizontal" style="width:100%;">
         <material-checkbox ng-model="xml">
           XML (desactivar para JSON)
@@ -142,11 +142,11 @@
         <span flex></span>
         <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="add($event)">Agregar</material-button>
       </div>
-      <material-card style="width: 500px; background-color:#119957;margin-right=" ng-repeat="airline in airlines">
-        <h2>{{airline.nombre}}</h2>
-        <p>Codigo: {{airline.codigo}}</p>
-        <p>host: {{airline.host}}</p>
-        <p>ext: {{airline.ext}}</p>
+      <material-card style="width: 99%;height:250px; background-color:#119957;margin-right:25px;" ng-repeat="airline in airlines">
+        <h2 style="text-align:center;">{{airline.nombre}}</h2>
+        <p style="text-align:center;">Codigo: {{airline.codigo}}</p>
+        <p style="text-align:center;">host: {{airline.host}}</p>
+        <p style="text-align:center;">ext: {{airline.ext}}</p>
         <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="edit($event,airline)">Editar</material-button>
         <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="delete($event,airline)">Eliminar</material-button>
       </material-card>
