@@ -6,12 +6,10 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
     login:false    
   };
   $scope.xml=true;
-  Date.prototype.yyyymmdd = function() {
-   var yyyy = this.getFullYear().toString();
-   var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
-   var dd  = this.getDate().toString();
-   return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
-  };
+  $scope.$on('user',function(user){
+    $scope.user = user;
+    console.log("holi");
+  });
   /*var params = {address: "guate", sensor: false};
   $http.get(
       'http://maps.googleapis.com/maps/api/geocode/xml',
@@ -25,7 +23,7 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
     $materialDialog({
       templateUrl: 'partials/sign-up.html',
       targetEvent: e,
-      controller: ['$scope', '$hideDialog','$http', function($scope, $hideDialog, $http) {
+      controller: ['$scope', '$hideDialog','$http','$rootScope', function($scope, $hideDialog, $http,$rootScope) {
         $scope.close = function() {
           $hideDialog();
         };
@@ -49,11 +47,8 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
               if (user.state == 0) {
                 $scope.wrongUsername = true;
               } else {
-                var scope = angular.element($("#body")).scope();
-                scope.$apply(function(){
-                  scope.user = user;
-                  scope.user.login = true;
-                }); 
+                user.login = true;
+                $rootScope.$broadcast('user',user);
               } 
             });
           }
@@ -83,11 +78,8 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
               if (user.state == 0) {
                 $scope.wrongUsername = true;
               } else {
-                var scope = angular.element($("#body")).scope();
-                scope.$apply(function(){
-                  scope.user = user;
-                  scope.user.login = true;
-                }); 
+                user.login = true;
+                $rootScope.$broadcast('user',user);
               } 
             });
           }
@@ -97,22 +89,48 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
   };
 }]);
 
-gvApp.controller("billetCtrl",['$scope','$http', function ($scope,$http){
-  $scope.onSearch = false;
-  $scope.searchFlight = function() {  
-    $scope.onSearch = true;
-    var fecha = $scope.fecha.yyyymmdd();
-    var params = {
-      origen: $scope.origen, 
-      destino: $scope.destino,
-      fecha: fecha,
-      xml: $scope.xml
-    };
-    return $http.post(
-      '/searchflight',
-      {params: params}
-    ).then(function(response) {
-      $scope.onSearch = false;
+gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($scope,$http,$materialDialog){
+  $scope.searchFlight = function(e) { 
+    $materialDialog({
+      templateUrl: 'partials/search-flights.html',
+      targetEvent: e,
+      locals: {
+        info: {
+          fecha:$scope.fecha,
+          origen: $scope.origen,
+          destino: $scope.destino,
+          xml: $scope.xml
+        }      
+      },
+      controller: ['$scope', '$hideDialog','$http','info', function($scope, $hideDialog, $http, info) {
+        $scope.onSearch = true;
+        Date.prototype.yyyymmdd = function() {
+         var yyyy = this.getFullYear().toString();
+         var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+         var dd  = this.getDate().toString();
+         return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
+        };
+        var f = info.fecha.yyyymmdd();
+        var params = {
+          origen: info.origen, 
+          destino: info.destino,
+          fecha: f,
+          xml: info.xml
+        };
+        return $http.post(
+          '/searchflight',
+          {params: params}
+        ).then(function(response) {
+          $scope.onSearch = false;
+          console.log(response);
+        });
+        $scope.close = function() {
+          $hideDialog();
+        };
+        $scope.next = function () {
+          
+        }
+      }]
     });
   };
   

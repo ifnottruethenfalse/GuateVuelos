@@ -6,13 +6,13 @@
  */
 
 module.exports = {
-	signUp : function (req, res) {
+	signup : function (req, res) {
     // body...
     var info = req.body.params;
 
     res.json({status:200});
   },
-  signUp : function (req, res) {
+  signin : function (req, res) {
     // body...
     var info = req.body.params;
 
