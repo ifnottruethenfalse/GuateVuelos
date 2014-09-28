@@ -167,10 +167,47 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
 }]);
 gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($scope,$materialDialog,$http){
   $http.post(
-      'addairline'
+      'getairline'
     ).then(function(response) {
       $scope.airlines = response.data;
     });
+  $scope.$on('newAirline',function(event,airline){
+    $scope.airlines.push(airline);
+  });
+  $scope.add = function (e) {
+    $materialDialog({
+      templateUrl: 'partials/addAirline.html',
+      targetEvent: e,
+      controller: ['$scope', '$hideDialog','$http', function($scope, $hideDialog, $http) {
+        $scope.close = function() {
+          $hideDialog();
+        };
+        $scope.login = function () {
+          if($scope.addAirline.$valid) {
+            var params = {
+              codigo: $scope.codigo, 
+              nombre: $scope.nombre,
+              host: $scope.host,
+              ext: $scope.ext
+            };
+            $http.post(
+              '/addairline',
+              {params: params}
+            ).then(function(response) {
+              console.log(response);
+              var airline = response.data;
+              if (user.state == 0) {
+                $scope.wrongCode = true;
+              } else {
+                $rootScope.$broadcast('newAirline',airline);
+                $hideDialog();
+              } 
+            });
+          }
+        }
+      }]
+    });
+  }
 
 }]);
 
