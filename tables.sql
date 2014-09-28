@@ -2,12 +2,15 @@
 
 CREATE TABLE USUARIOS(
 	nit integer,
+	usuario char(20),
+	password char(20),
 	nombre char(20),
 	apellido char(20),
-	numeropasaporte char(20),
+	numeropasaporte char(20) UNIQUE,
 	tarjetadecredito char(20),
 	correoelectronico char(20),
-	PRIMARY KEY(numeropasaporte)
+	superuser boolean,
+	PRIMARY KEY(usuario)
 );
 CREATE TABLE AEROLINEAS(
 	codigo char(10),
