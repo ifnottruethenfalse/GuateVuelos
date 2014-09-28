@@ -88,6 +88,56 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
       }]
     });
   };
+  $scope.logOut = function () {
+    $scope.user={
+      login:false    
+    };
+  }
+  $scope.configure = function (e) {
+    $materialDialog({
+      templateUrl: 'partials/configure.html',
+      targetEvent: e,
+      locals: {
+        user: $scope.user
+      },
+      controller: ['$scope', '$hideDialog','$http','$rootScope','user', function($scope, $hideDialog, $http,$rootScope,user) {
+        $scope.username=user.username;
+        $scope.password=user.password;
+        $scope.nombre=user.name;
+        $scope.apellido=user.lastName;
+        $scope.email=user.email;
+        $scope.ddv=user.documento;
+        $scope.nit=user.nit;
+        $scope.tdc=user.tarjeta;
+        $scope.close = function() {
+          $hideDialog();
+        };
+        $scope.save = function () {
+          if($scope.config.$valid) {
+            var params = {
+              username: $scope.username, 
+              password: $scope.password,
+              name: $scope.nombre,
+              lastName: $scope.apellido,
+              email: $scope.email,
+              documento: $scope.ddv,
+              nit: $scope.nit,
+              tarjeta: $scope.tdc
+            };
+            $http.post(
+              '/configure',
+              {params: params}
+            ).then(function(response) {
+              var user = response.data;
+              user.login = true;
+              $rootScope.$broadcast('user',user);
+              $hideDialog();
+            });
+          }
+        }
+      }]
+    });
+  };
 }]);
 
 gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($scope,$http,$materialDialog){

@@ -6,8 +6,8 @@
       <!-- fill up the space between left and right area -->
       <span flex></span>
        <span ng-show="user.login">Welcome {{user.name}}</span>
-      <material-button ng-show="user.login" class="material-button-raised signUp" style=" background-color: #91a7ea;" >Configurar</material-button>
-      <material-button ng-show="user.login" class="material-button-raised signUp" style=" background-color: #91a7ea;" >Cerrar Sesion</material-button>
+      <material-button ng-show="user.login" class="material-button-raised signUp" style=" background-color: #91a7ea;" ng-click="configure($event)">Configurar</material-button>
+      <material-button ng-show="user.login" class="material-button-raised signUp" style=" background-color: #91a7ea;" ng-click="logOut()">Cerrar Sesion</material-button>
       <material-button ng-hide="user.login" class="material-button-raised material-button-colored" ng-click="signIn($event)">Iniciar Sesion</material-button>
       <material-button ng-hide="user.login" class="material-button-raised signUp" style=" background-color: #91a7ea;" ng-click="signUp($event)">Registrarse</material-button>
     </div>
