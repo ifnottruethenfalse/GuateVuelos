@@ -6,12 +6,27 @@
       <material-item ng-repeat="flightList in flightLists">
         <material-item-content>
           <div class="material-tile-left">
-              <h2>{{flighList.aereolinea}}</h2>
+              <h2>{{flightList.aereolinea}}</h2>
           </div>
-          <div class="material-tile-content" ng-repeat="">
-            <h3>{{item.who}}</h3>
+          <div class="material-tile-content" ng-repeat="vuelo in flightList.vuelo">
+            <h3>{{vuelo.numero}}</h3>
             <p>
-              {{item.notes}}
+              {{vuelo.fecha}}
+            </p>
+            <p>
+              {{vuelo.origen}}
+            </p>
+            <p>
+              {{vuelo.destino}}
+            </p>
+            <p>
+              {{vuelo.hora}}
+            </p>
+            <p>
+              {{vuelo.precio}}
+            </p>
+            <p>
+              {{vuelo.fecha}}
             </p>
           </div>
         </material-item-content>

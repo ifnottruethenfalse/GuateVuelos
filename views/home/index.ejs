@@ -134,8 +134,22 @@
     <div class="animate-switch" ng-switch-when="5">
       {{selectedIndex}}
     </div>
-    <div class="animate-switch" ng-switch-when="6">
-      {{selectedIndex}}
+    <div class="animate-switch" ng-switch-when="6" ng-controller="superuserCtrl" layout="vertical">
+      <div layout="horizontal">
+        <material-checkbox ng-model="xml">
+          XML (desactivar para JSON)
+        </material-checkbox>
+        <span flex></span>
+        <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="add($event)">Agregar</material-button>
+      </div>
+      <material-card style="width: 100%; background-color:#119957;" ng-repeat="airline in airlines">
+        <h2>{{airline.nombre}}</h2>
+        <p>Codigo: {{airline.codigo}}</p>
+        <p>host: {{airline.host}}</p>
+        <p>ext: {{airline.ext}}</p>
+        <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="edit($event)">Editar</material-button>
+        <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="delete($event)">Eliminar</material-button>
+      </material-card>
     </div>
     
     
