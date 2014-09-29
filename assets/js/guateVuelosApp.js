@@ -114,6 +114,7 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
         };
         $scope.save = function () {
           if($scope.config.$valid) {
+            console.log("ya entre");
             var params = {
               username: $scope.username, 
               password: $scope.password,
@@ -128,6 +129,7 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
               '/configure',
               {params: params}
             ).then(function(response) {
+              console.log(response);
               var user = response.data;
               user.login = true;
               $rootScope.$broadcast('user',user);
