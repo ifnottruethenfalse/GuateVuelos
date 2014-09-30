@@ -114,7 +114,6 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
         };
         $scope.save = function () {
           if($scope.config.$valid) {
-            console.log("ya entre");
             var params = {
               username: $scope.username, 
               password: $scope.password,
