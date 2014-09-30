@@ -39,6 +39,7 @@ module.exports = {
           return console.error('error running query', err);
         }
         res.send(result.rows);
+        client.end();
         });
       });
     });
@@ -66,6 +67,7 @@ module.exports = {
           return console.error('error running query', err);
         }
         res.send(result.rows);
+        client.end();
         });
       });
     });
@@ -99,6 +101,7 @@ module.exports = {
               return console.error('error running query', err);
             }
             res.send(info);
+            client.end();
           });
         }
       });
@@ -122,6 +125,7 @@ module.exports = {
           return console.error('error running query', err);
         }
         res.send(result.rows);
+        client.end();
       });
     });
   },

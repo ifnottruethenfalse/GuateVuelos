@@ -30,10 +30,10 @@ module.exports = {
             info.state = 200;
             info.superuser = false;
             res.send(info);
+            client.end();
           });
         }
         //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
-        client.end();
       });
     });
 
@@ -91,24 +91,24 @@ module.exports = {
         else{
             var query = client.query("UPDATE USUARIOS SET nombre='"+info.name+"', apellido='"+info.lastName+"', correoelectronico='"+info.email+"', tarjetadecredito='"+info.tarjeta+"', numeropasaporte='"+info.documento+"', password='"+info.password+"' WHERE usuario='"+info.username+"';", function(err, result) {
                 var query = client.query("SELECT * FROM USUARIOS WHERE usuario='"+info.username+"'", function(err, result) {
-                if(err) {
-                   return console.error('error running query', err);
-                }
+                  if(err) {
+                     return console.error('error running query', err);
+                  }
 
-                info.state = 200;
-                info.superuser = result.rows[0].superuser;
-                info.name = result.rows[0].nombre;
-                info.lastName = result.rows[0].apellido;
-                info.username = result.rows[0].usuario;
-                info.email = result.rows[0].correoelectronico;
-                info.tarjeta= result.rows[0].tarjetadecredito;
-                info.documento = result.rows[0].numeropasaporte;
-                info.nit = result.rows[0].nit;
-                    res.send(info);
+                  info.state = 200;
+                  info.superuser = result.rows[0].superuser;
+                  info.name = result.rows[0].nombre;
+                  info.lastName = result.rows[0].apellido;
+                  info.username = result.rows[0].usuario;
+                  info.email = result.rows[0].correoelectronico;
+                  info.tarjeta= result.rows[0].tarjetadecredito;
+                  info.documento = result.rows[0].numeropasaporte;
+                  info.nit = result.rows[0].nit;
+                  res.send(info);
+                  client.end();
                 });
-        });
+          });
         }
-          client.end();
       });
     });
   } 
