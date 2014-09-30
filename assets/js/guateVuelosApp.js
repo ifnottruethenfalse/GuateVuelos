@@ -92,6 +92,7 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
     $scope.user={
       login:false    
     };
+    $scope.selectedIndex=0;
   }
   $scope.configure = function (e) {
     $materialDialog({
@@ -109,11 +110,13 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
         $scope.ddv=user.documento;
         $scope.nit=user.nit;
         $scope.tdc=user.tarjeta;
+        console.log(user);
         $scope.close = function() {
           $hideDialog();
         };
         $scope.save = function () {
           if($scope.config.$valid) {
+            console.log("ya entre");
             var params = {
               username: $scope.username, 
               password: $scope.password,
