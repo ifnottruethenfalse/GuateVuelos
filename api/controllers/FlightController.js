@@ -37,7 +37,8 @@ module.exports = {
             if(info.xml){
               $http({method: 'GET', url: "http://'"+result.rows[i].nombre+"'/script_lista_vuelos?origen='"+info.origen+"'&destino='"+info.destino+"'&fecha='"+info.fecha+"'&type='"+info.xml+"',type=XML"}).
                 success(function(data, status, headers, config) {
-                  respuesta[i] = "<lista_vuelos>\n<aerolinea>'"+result.rows[i].nombre+"'</aerolinea>\n<vuelo>'"+data.vuelo+"'</vuelo>\n<lista_vuelos>";
+                  respuesta[i] = xmlParser.parse(data);
+                  //respuesta[i] = "<lista_vuelos>\n<aerolinea>'"+result.rows[i].nombre+"'</aerolinea>\n<vuelo>'"+data.vuelo+"'</vuelo>\n<lista_vuelos>";
                //XML
               }).
                 error(function(data, status, headers, config) {
@@ -47,7 +48,8 @@ module.exports = {
             else{
               $http({method: 'GET', url: "http://'"+result.rows[i].nombre+"'/script_lista_vuelos?origen='"+info.origen+"'&destino='"+info.destino+"'&fecha='"+info.fecha+"'&type='"+info.xml+"',type=JSON"}).
                 success(function(data, status, headers, config) {
-                  respuesta[i] = "{\"aerolinea\":'"+result.rows[i].nombre+"',\"vuelo\":[{'"+data.vuelo+"'}]}";
+                  respuesta[i] = data;
+                  //respuesta[i] = "{\"aerolinea\":'"+result.rows[i].nombre+"',\"vuelo\":[{'"+data.vuelo+"'}]}";
                //JSON
               }).
                 error(function(data, status, headers, config) {
@@ -57,9 +59,7 @@ module.exports = {
             i++;
           }
         }
-            info.state = 200;
-            info.superuser = false;
-            res.send(info);
+            res.send(respuesta);
             client.end();
           });
         });
