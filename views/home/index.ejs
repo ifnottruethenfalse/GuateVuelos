@@ -20,7 +20,8 @@
    <material-tab ng-class="{active:selectedIndex == 3}" label="Tours"></material-tab>
    <material-tab ng-class="{active:selectedIndex == 4}" label="Autos"></material-tab>
    <material-tab ng-class="{active:selectedIndex == 5}" label="Contacto"></material-tab>
-   <material-tab ng-show="user.superuser" ng-class="{active:selectedIndex == 6}" label="Configurar"></material-tab>
+   <material-tab ng-show="user.superuser" ng-class="{active:selectedIndex == 6}" label="Configurar Aereolinea"></material-tab>
+   <material-tab ng-show="user.superuser" ng-class="{active:selectedIndex == 7}" label="Configurar Aereopuerto"></material-tab>
  </material-tabs>
  <material-content ng-class="{tab1:selectedIndex == 0,tab2:selectedIndex == 1,tab3:selectedIndex == 2,tab4:selectedIndex == 3,tab5:selectedIndex == 4,tab6:selectedIndex == 5}" class="animate-switch-container" ng-switch on="selectedIndex" flex>
     <div class="animate-switch" ng-switch-when="0" layout="horizontal"  ng-controller="billetCtrl" flex>
@@ -104,14 +105,14 @@
               <div ng-bind-html="address.formatted_address | highlight: $select.search"></div>
             </ui-select-choices>
           </ui-select>-->
-          <material-input-group class="material-input-group-theme-light material-input-group-inverted">
-            <label for="origen" style="color:white;">Desde</label>
-            <material-input id="origen" name="origen" type="text" ng-model="origen" style="width:100%;" required>
-          </material-input-group>
-          <material-input-group class="material-input-group-theme-light material-input-group-inverted">
-            <label for="destino" style="color:white;">Hacia</label>
-            <material-input id="destino" name="destino" type="text" ng-model="destino" style="width:100%;" required>
-          </material-input-group>
+          <select ui-select2 name="origen" ng-model="origen" data-placeholder="Origen" ng-required="true">
+              <option value=""></option>
+              <option ng-repeat="place in places" ng-show="destino != place" value="{{place}}">{{place}}</option>
+          </select>
+          <select ui-select2 name="destino" ng-model="destino" data-placeholder="Destino" ng-required="true">
+              <option value=""></option>
+              <option ng-repeat="place in places" ng-show="origen != place" value="{{place}}">{{place}}</option>
+          </select>
           <material-input-group class="material-input-group-theme-light material-input-group-inverted" ng-class="{'material-input-has-value':fecha}">
             <material-input name="fecha" id="fecha" ui-date="{minDate:0}" type="text" ng-model="fecha" style="width:100%;margin-top: 20px;" placeholder="Fecha" ng-required="true">
           </material-input-group>
@@ -149,6 +150,19 @@
         <p style="text-align:center;">ext: {{airline.ext}}</p>
         <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="edit($event,airline)">Editar</material-button>
         <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="delete($event,airline)">Eliminar</material-button>
+      </material-card>
+    </div>
+    <div class="animate-switch" ng-switch-when="7" ng-controller="superuserAirportCtrl" layout="vertical">
+      <div layout="horizontal" style="width:100%;">
+        <span flex></span>
+        <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="add($event)">Agregar</material-button>
+      </div>
+      <material-card style="width: 99%;height:225px; background-color:#96ba82;margin-right:25px;" ng-repeat="airport in airports">
+        <h2 style="text-align:center;">{{airport.name}}</h2>
+        <p style="text-align:center;">Codigo: {{airport.id}}</p>
+        <p style="text-align:center;">Nombre: {{airport.place}}</p>
+        <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="edit($event,airport)">Editar</material-button>
+        <material-button style="margin: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="delete($event,airport)">Eliminar</material-button>
       </material-card>
     </div>
     

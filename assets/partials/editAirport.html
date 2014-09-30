@@ -1,21 +1,17 @@
 <material-dialog>
   <div class="dialog-content">
-    <form style="padding-left: 20px;" name="editAirline">
+    <form style="padding-left: 20px;" name="editAirport">
       <material-input-group ng-class="{'material-input-group-theme-red':addAirline.codigo.$dirty && addAirline.codigo.$invalid}" class="material-input-group-theme-light">
         <label for="c">Codigo</label>
-        <material-input id="c" name="codigo" type="text" ng-model="codigo" style="width:100%;" required disabled ng-trim>
+        <material-input id="c" name="codigo" type="text" ng-model="id" style="width:100%;" required disabled ng-trim ng-pattern="/^[a-z0-9_-]{1,3}$/">
       </material-input-group>
       <material-input-group ng-class="{'material-input-group-theme-red':addAirline.nombre.$dirty && addAirline.nombre.$invalid}" class="material-input-group-theme-light">
         <label for="nombre">Nombre</label>
-        <material-input id="nombre" name="nombre" type="text" ng-model="nombre" style="width:100%;" ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/" required ng-trim>
+        <material-input id="nombre" name="nombre" type="text" ng-model="name" style="width:100%;" ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/" required ng-trim>
       </material-input-group>
       <material-input-group ng-class="{'material-input-group-theme-red':addAirline.host.$dirty && addAirline.host.$invalid}" class="material-input-group-theme-light">
-        <label for="host">Host</label>
-        <material-input id="host" name="host" type="text" ng-model="host" style="width:100%;" required ng-trim>
-      </material-input-group>
-      <material-input-group ng-class="{'material-input-group-theme-red':addAirline.ext.$dirty && addAirline.ext.$invalid}" class="material-input-group-theme-light">
-        <label for="ext">Ext</label>
-        <material-input id="ext" name="ext" type="text" ng-model="ext" style="width:100%;" required ng-trim>
+        <label for="host">Lugar</label>
+        <material-input id="host" name="host" type="text" ng-model="place" style="width:100%;" required ng-trim>
       </material-input-group>
     </form>
   </div>

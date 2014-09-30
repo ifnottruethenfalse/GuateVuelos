@@ -64,9 +64,10 @@
   .tableHead td{
     color:rgba(255, 255, 255, 1);
   }
-  ::-webkit-scrollbar { 
-    display: none; 
-}
 material-dialog {
   color:black;
+}
+.select2-container {
+  width:30%;
+  margin:20px;
 }

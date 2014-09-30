@@ -1,4 +1,4 @@
-var gvApp = angular.module("gvApp", ["ngMaterial","ui.date",'ui.mask']); // array is require
+var gvApp = angular.module("gvApp", ["ngMaterial","ui.date",'ui.mask','ui.select2']); // array is require
 
 gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', function ($scope,$materialDialog,$http,xml2json){
   $scope.selectedIndex = 0;
@@ -92,7 +92,7 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
     $scope.user={
       login:false    
     };
-    $scope.selectedIndex=0;
+    $scope.selectedIndex = 0;
   }
   $scope.configure = function (e) {
     $materialDialog({
@@ -102,21 +102,20 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
         user: $scope.user
       },
       controller: ['$scope', '$hideDialog','$http','$rootScope','user', function($scope, $hideDialog, $http,$rootScope,user) {
-        $scope.username=user.username;
-        $scope.password=user.password;
-        $scope.nombre=user.name;
-        $scope.apellido=user.lastName;
-        $scope.email=user.email;
-        $scope.ddv=user.documento;
-        $scope.nit=user.nit;
-        $scope.tdc=user.tarjeta;
-        console.log(user);
+        $scope.username=user.username.trim();
+        $scope.password=user.password.trim();
+        $scope.nombre=user.name.trim();
+        $scope.apellido=user.lastName.trim();
+        $scope.email=user.email.trim();
+        $scope.ddv=user.documento.trim();
+        $scope.nit=user.nit.trim();
+        $scope.tdc=user.tarjeta.trim();
         $scope.close = function() {
           $hideDialog();
         };
         $scope.save = function () {
+          console.log($scope.config.$valid)
           if($scope.config.$valid) {
-            console.log("ya entre");
             var params = {
               username: $scope.username, 
               password: $scope.password,
@@ -131,7 +130,6 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
               '/configure',
               {params: params}
             ).then(function(response) {
-              console.log(response);
               var user = response.data;
               user.login = true;
               $rootScope.$broadcast('user',user);
@@ -145,6 +143,18 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
 }]);
 
 gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($scope,$http,$materialDialog){
+  $scope.places = [];
+  $http.post(
+      'getairport'
+    ).then(function(response) {
+      for (var i = 0; i < response.data.length; i++) {
+        $scope.places.push(response.data[i].place);
+      }
+    });
+  $scope.$on('newAirport',function(event,airline){
+    $scope.places.push(airline.place);
+    console.log($scope.places);
+  });
   $scope.searchFlight = function(e) { 
     $materialDialog({
       templateUrl: 'partials/search-flights.html',
@@ -247,7 +257,6 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
               '/addairline',
               {params: params}
             ).then(function(response) {
-              console.log(response);
               var airline = response.data;
               if (airline.state == 0) {
                 $scope.wrongCode = true;
@@ -269,10 +278,10 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
         airline: airline
       },
       controller: ['$scope', '$hideDialog','$http','$rootScope','airline', function($scope, $hideDialog, $http,$rootScope,airline) {
-        $scope.codigo = airline.codigo;
-        $scope.nombre = airline.nombre;
-        $scope.host = airline.host;
-        $scope.ext = airline.ext;
+        $scope.codigo = airline.codigo.trim();
+        $scope.nombre = airline.nombre.trim();
+        $scope.host = airline.host.trim();
+        $scope.ext = airline.ext.trim();
         $scope.close = function() {
           $hideDialog();
         };
@@ -324,9 +333,128 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
             '/deleteairline',
             {params: params}
           ).then(function(response) {
-            console.log(response);
             var airlines = response.data;
             $rootScope.$broadcast('newAirlines',airlines);
+            $hideDialog();
+          });
+        }
+      }]
+    });
+  }
+
+}]);
+
+gvApp.controller("superuserAirportCtrl",['$scope','$materialDialog','$http',function ($scope,$materialDialog,$http){
+  $http.post(
+      'getairport'
+    ).then(function(response) {
+      $scope.airports = response.data;
+    });
+  $scope.$on('newAirport',function(event,airport){
+    $scope.airports.push(airport);
+  });
+  $scope.$on('newAirports',function(event,airports){
+    $scope.airports = airports;
+  });
+  $scope.add = function (e) {
+    $materialDialog({
+      templateUrl: 'partials/addAirport.html',
+      targetEvent: e,
+      controller: ['$scope', '$hideDialog','$http','$rootScope', function($scope, $hideDialog, $http,$rootScope) {
+        $scope.close = function() {
+          $hideDialog();
+        };
+        $scope.add = function () {
+          console.log("add")
+          if($scope.addAirport.$valid) {
+            console.log("add valid")
+            var params = {
+              id: $scope.id, 
+              name: $scope.name,
+              place: $scope.place
+            };
+            $http.post(
+              '/addairport',
+              {params: params}
+            ).then(function(response) {
+              var airport = response.data;
+              if (airport.state == 0) {
+                $scope.wrongCode = true;
+              } else {
+                $rootScope.$broadcast('newAirport',airport);
+                $hideDialog();
+              } 
+            });
+            console.log("post")
+          }
+        }
+      }]
+    });
+  }
+  $scope.edit = function (e,airport) {
+    $materialDialog({
+      templateUrl: 'partials/editAirport.html',
+      targetEvent: e,
+      locals: {
+        airport: airport
+      },
+      controller: ['$scope', '$hideDialog','$http','$rootScope','airport', function($scope, $hideDialog, $http,$rootScope,airport) {
+        $scope.id = airport.id.trim();
+        $scope.name = airport.name.trim();
+        $scope.place = airport.place.trim();
+        $scope.close = function() {
+          $hideDialog();
+        };
+        $scope.edit = function () {
+          console.log("aqui")
+          if($scope.editAirport.$valid) {
+            console.log("alla")
+            var params = {
+              id: $scope.id, 
+              name: $scope.name,
+              place: $scope.place
+            };
+            $http.post(
+              '/editairport',
+              {params: params}
+            ).then(function(response) {
+              console.log(response);
+              var airports = response.data;
+              $rootScope.$broadcast('newAirports',airports);
+              $hideDialog();
+            });
+            console.log("asaber")
+          }
+        }
+      }]
+    });
+  }
+  $scope.delete = function (e,airport) {
+    $materialDialog({
+      templateUrl: 'partials/deleteAirport.html',
+      targetEvent: e,
+      locals: {
+        airport: airport
+      },
+      controller: ['$scope', '$hideDialog','$http','$rootScope','airport', function($scope, $hideDialog, $http,$rootScope,airport) {
+        $scope.id = airport.id;
+        $scope.name = airport.name;
+        $scope.place = airport.place;
+        $scope.close = function() {
+          $hideDialog();
+        };
+        $scope.delete = function () {
+          var params = {
+            id: $scope.id, 
+            name: $scope.name,
+            place: $scope.place
+          };
+          $http.post(
+            '/deleteairport',
+            {params: params}
+          ).then(function(response) {
+            var airports = response.data;
+            $rootScope.$broadcast('newAirports',airports);
             $hideDialog();
           });
         }
