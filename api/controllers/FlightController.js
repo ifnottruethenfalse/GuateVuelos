@@ -24,7 +24,7 @@ module.exports = {
       if(err) {
         return console.error('could not connect to postgres', err);
       }
-      var query = client.query("SELECT codigo FROM AEROLINEAS", function(err, result) {
+      var query = client.query("SELECT codigo, nombre FROM AEROLINEAS", function(err, result) {
         if(err) {
           return console.error('error running query', err);
         }
@@ -34,13 +34,27 @@ module.exports = {
         else{
           var respuesta = [result.rows.length];
           while(i < result.rows.length ){
-            client.query("SELECT * FROM VUELOS WHERE codigo= '"+result.rows[i]+"' AND origen='"+info.origen+"' AND destino='"+info.destino+"' AND fecha='"+info.fecha+"'" ,function(err, result1) {
-              i++;
-            if(err) {
-              return console.error('error running query', err);
+            if(info.xml){
+              $http({method: 'GET', url: "http://'"+result.rows[i].nombre+"'/script_lista_vuelos?origen='"+info.origen+"'&destino='"+info.destino+"'&fecha='"+info.fecha+"'&type='"+info.xml+"',type=XML"}).
+                success(function(data, status, headers, config) {
+                  respuesta[i] = "<lista_vuelos>\n<aerolinea>'"+result.rows[i].nombre+"'</aerolinea>\n<vuelo>'"+data.vuelo+"'</vuelo>\n<lista_vuelos>";
+               //XML
+              }).
+                error(function(data, status, headers, config) {
+                res.json({state:0}); 
+                });
             }
-
-            });
+            else{
+              $http({method: 'GET', url: "http://'"+result.rows[i].nombre+"'/script_lista_vuelos?origen='"+info.origen+"'&destino='"+info.destino+"'&fecha='"+info.fecha+"'&type='"+info.xml+"',type=JSON"}).
+                success(function(data, status, headers, config) {
+                  respuesta[i] = "{\"aerolinea\":'"+result.rows[i].nombre+"',\"vuelo\":[{'"+data.vuelo+"'}]}";
+               //JSON
+              }).
+                error(function(data, status, headers, config) {
+                res.json({state:0}); 
+                });
+            }
+            i++;
           }
         }
             info.state = 200;
