@@ -14,6 +14,7 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+ var http = require("http");
 var pg = require("pg");
 module.exports = {
     
@@ -26,6 +27,7 @@ module.exports = {
     var info = req.body.params;
     var conString = "pg://postgres:cris12345@localhost:5432/GuateVuelos";
     var client = new pg.Client(conString);
+    
     client.connect(function(err) {
       if(err) {
         return console.error('could not connect to postgres', err);
@@ -116,6 +118,8 @@ module.exports = {
   getairports: function (req, res) {
     var conString = "pg://postgres:cris12345@localhost:5432/GuateVuelos";
     var client = new pg.Client(conString);
+    
+    
     client.connect(function(err) {
       if(err) {
         return console.error('could not connect to postgres', err);

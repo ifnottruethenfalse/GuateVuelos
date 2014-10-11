@@ -107,11 +107,11 @@
           </ui-select>-->
           <select ui-select2 name="origen" ng-model="origen" data-placeholder="Origen" ng-required="true">
               <option value=""></option>
-              <option ng-repeat="place in places" ng-show="destino != place" value="{{place}}">{{place}}</option>
+              <option ng-repeat="place in places" ng-show="destino != place.id" value="{{place.id}}">{{place.name}}</option>
           </select>
           <select ui-select2 name="destino" ng-model="destino" data-placeholder="Destino" ng-required="true">
               <option value=""></option>
-              <option ng-repeat="place in places" ng-show="origen != place" value="{{place}}">{{place}}</option>
+              <option ng-repeat="place in places" ng-show="origen != place.id" value="{{place.id}}">{{place.name}}</option>
           </select>
           <material-input-group class="material-input-group-theme-light material-input-group-inverted" ng-class="{'material-input-has-value':fecha}">
             <material-input name="fecha" id="fecha" ui-date="{minDate:0}" type="text" ng-model="fecha" style="width:100%;margin-top: 20px;" placeholder="Fecha" ng-required="true">
