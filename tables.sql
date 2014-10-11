@@ -1,44 +1,44 @@
 /*Script*/
 
 CREATE TABLE USUARIOS(
-	nit char(20),
-	usuario char(20),
-	password char(20),
-	nombre char(20),
-	apellido char(20),
-	numeropasaporte char(20),
-	tarjetadecredito char(20),
-	correoelectronico char(20),
+	nit varchar,
+	usuario varchar,
+	password varchar,
+	nombre varchar,
+	apellido varchar,
+	numeropasaporte varchar,
+	tarjetadecredito varchar,
+	correoelectronico varchar,
 	superuser boolean,
 	PRIMARY KEY(usuario)
 );
 CREATE TABLE AEROLINEAS(
 	codigo char(10),
-	nombre char(20),
-	host char(20),
+	nombre varchar,
+	host varchar,
 	ext char(20),
 	PRIMARY KEY(codigo)
 );
 
 CREATE TABLE VUELOS(
-	codigo char(10),
+	codigo varchar,
 	numerovuelo int,
-	fecha char(20),
-	origen char(20),
-	destino char(20),
-	hora char(20),
+	fecha varchar,
+	origen varchar,
+	destino varchar,
+	hora varchar,
 	precio float,
-	status char(20),
+	status varchar,
 	PRIMARY KEY(numerovuelo, codigo),
 	FOREIGN KEY(codigo) REFERENCES AEROLINEAS 
 	ON DELETE CASCADE
 );
 
 CREATE TABLE BOLETO(
-	codigo char(10),
+	codigo varchar,
 	numerovuelo int,
-	fecha char(20),
-	hora char(20),
+	fecha varchar,
+	hora varchar,
 	numeroboleto int,
 	PRIMARY KEY(numeroboleto, codigo),
 	FOREIGN KEY(codigo, numerovuelo) REFERENCES VUELOS(codigo, numerovuelo)
@@ -46,10 +46,10 @@ CREATE TABLE BOLETO(
 );
 
 CREATE TABLE COMPRAS(
-	usuario char(20),
+	usuario varchar,
 	numeroboleto int,
-	codigo char(10),
-	fecha char(20),
+	codigo varchar,
+	fecha varchar,
 	PRIMARY KEY(numeroboleto, usuario),
 	FOREIGN KEY(usuario) REFERENCES USUARIOS(usuario)
 	ON DELETE CASCADE,
@@ -59,8 +59,8 @@ CREATE TABLE COMPRAS(
 );
 CREATE TABLE AIRPORT(
 	id char(3),
-	place char(20),
-	name char(20),
+	place varchar,
+	name varchar,
 	PRIMARY KEY(id)
 );
 INSERT INTO usuarios VALUES(0,'superuser','cris12345','cristhian','morales','1234567890','0123456789012345','cristhian@gmail.com',true) /* Para ingresar el superuser*/
