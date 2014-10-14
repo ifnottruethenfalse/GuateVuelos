@@ -1,0 +1,9 @@
+<material-dialog>
+  <div class="dialog-content" layout="vertical" layout-align="start center">
+    <h1>Escoja un Asiento</h1>
+    <div style="width:172px;">
+      <material-checkbox style="display:inline-block;" ng-repeat="asiento in asientos" ng-change="select($index)" ng-model="asiento.value" ng-disabled="asiento.ocupado"></material-checkbox>
+    </div>
+    <material-button class="material-button-raised" style=" background-color: #91a7ea;" ng-click="reserve()">Siguiente</material-button>
+  </div>
+</material-dialog>  

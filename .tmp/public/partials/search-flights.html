@@ -1,0 +1,39 @@
+<material-dialog style="width:80%">
+  <div class="dialog-content">
+    <material-linear-progress ng-if="onSearch" style="margin-top: 30px;" mode="indeterminate"></material-linear-progress>
+    <material-list>
+
+      <material-item ng-repeat="flightList in flightLists">
+        <material-item-content layout="horizontal" style="width:976px;">
+          <h2 flex="25">{{flightList.aerolinea}}</h2>
+          <div class="material-tile-content" flex="75">
+            <table class="search">
+              <tr>
+                <th>Numero</th>
+                <th>Fecha</th>
+                <th>Origen</th>
+                <th>Destino</th>
+                <th>hora</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Accion</th>
+              </tr>
+              <tr ng-repeat="vuelo in flightList.vuelo">
+                <td>{{vuelo.numero}}</td>
+                <td>{{vuelo.fecha}}</td>
+                <td>{{origen}}</td>
+                <td>{{destino}}</td>
+                <td>{{vuelo.hora}}</td>
+                <td>{{vuelo.precio | currency}}</td>
+                <td ng-if="vuelo.status == '1'">No ha despegado</td>
+                <td ng-if="vuelo.status == '2'">Despego</td>
+                <td ng-if="vuelo.status == '3'">Aterrizo</td>
+                <td><material-button class="material-button-raised" style=" background-color: #91a7ea;" ng-click="reserve(vuelo,flightList.aereolinea)" ng-disabled="vuelo.status!=1">Comprar</material-button></td>
+              </tr>
+            </table>
+          </div>
+        </material-item-content>
+      </material-item>
+    </material-list>
+  </div>
+</material-dialog>  
