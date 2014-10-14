@@ -121,19 +121,41 @@
       </material-card>
     </div>
     <div class="animate-switch" ng-switch-when="1">
+      <!-- PAQUETES-->
+
       {{selectedIndex}}
     </div>
     <div class="animate-switch" ng-switch-when="2">
+      <!-- HOTELES-->
       {{selectedIndex}}
     </div>
     <div class="animate-switch" ng-switch-when="3">
+      <!-- TOURS-->
       {{selectedIndex}}
     </div>
     <div class="animate-switch" ng-switch-when="4">
+      <!-- AUTOS-->
       {{selectedIndex}}
     </div>
     <div class="animate-switch" ng-switch-when="5">
-      {{selectedIndex}}
+      <!-- CONTACTO-->
+      <material-toolbar class="material-theme-dark">
+      <span class="material-flex">Atencion al Cliente</span>
+    </material-toolbar>
+      <material-content class="material-content-padding" style="height: 1000px;">
+      <material-card style="width: 50%;height:500px; background-color:#119957;margin-right:25px;">
+      <p>Si aún no has realizado tu reservación y tienes dudas al respecto, consulta las diferentes secciones del menú de la izquierda para encontrar las respuestas.
+        Hemos incluido una serie de preguntas y respuestas que puedes consultar en el apartado de “Consultas frecuentes”.</p>
+      <p>Nota: si necesitas comunicarte para cancelar tu reservación, recuerda que sólo atendemos las consultas correspondientes a clientes que hayan realizado reservaciones a través de los sitios web de eDreams o de nuestro Centro telefónico.</p>
+      <p>Las reservaciones por teléfono tienen un recargo adicional de 15$.</p>
+      <p>Contacto telefónico
+      <p>Si por algún motivo tu duda no ha sido resuelta, agradeceríamos que te pongas en contacto con eDreams a través de nuestro <h2>teléfono: +1 (646) 328 4545 </h2>
+      Nuevo: Ahora abierto 24 horas al día!</p>
+      <h1>We speak English too! Call +1 (646) 328 4545</h1>
+       
+      <h1>Si estás fuera del país llama al  +34 93 4920535</h1>
+    </material-card>
+    </material-content>
     </div>
     <div class="animate-switch" ng-switch-when="6" ng-controller="superuserCtrl" layout="vertical">
       <div layout="horizontal" style="width:100%;">

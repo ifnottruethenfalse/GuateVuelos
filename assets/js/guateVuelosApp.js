@@ -141,7 +141,6 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
     });
   };
 }]);
-
 gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($scope,$http,$materialDialog){
   $scope.places = [];
   $http.post(
@@ -463,6 +462,36 @@ gvApp.controller("superuserAirportCtrl",['$scope','$materialDialog','$http',func
   }
 
 }]);
+gvApp.controller('autosCtrl',function(){
+  this.products = cars;
+  this.cars = [{
+              marca: 'Toyota Echo or Similar',
+              pack: "Standard Package - Price includes: Unlimited Kilometers, Primary Liability Insurance and Local Taxes.",
+              price: 'US$93.13',
+              image: 'assets/images/toyota_echo.jpg'
+           },
+           {
+              marca: 'Suzuki Maruti or Similar',
+              pack: "Standard package - Price includes unlimited mileage, primary liability insurance and local taxes",
+              price: 'US$73.29',
+              image: 'assets/images/suzuki_maruti.jpg'
+           },
+           {
+              marca: 'Nissan Sentra or Similar',
+              pack: "Standard Package - Price includes: Unlimited Kilometers, Primary Liability Insurance and Local Taxes.",
+              price: 'US$105.26',
+              image: 'assets/images/sentra_lrg.jpg'
+           },
+           {
+              marca: 'Mitsubishi Lancer or Similar',
+              pack: "Standard Package - Price includes: Unlimited Kilometers, Primary Liability Insurance and Local Taxes.",
+              price: 'US$121.94',
+              image: 'assets/images/mitsubishi_lancer.jpg'
+           }];
+});
+gvApp.controller('hotelesCtrl',function(){
+  this.products = hoteles;
+});
 
 gvApp.factory('xml2json',function(){
   return {

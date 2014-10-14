@@ -63,4 +63,4 @@ CREATE TABLE AIRPORT(
 	name varchar,
 	PRIMARY KEY(id)
 );
-INSERT INTO usuarios VALUES(0,'superuser','cris12345','cristhian','morales','1234567890','0123456789012345','cristhian@gmail.com',true) /* Para ingresar el superuser*/
+INSERT INTO usuarios VALUES(0,'superuser','cris12345','cristhian','morales','1234567890','0123456789012345','cristhian@gmail.com',true) /* Para ingresar el superuser */
