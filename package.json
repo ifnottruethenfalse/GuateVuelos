@@ -16,7 +16,8 @@
     "q": "^1.0.1",
     "request": "^2.44.0",
     "sails": "0.9.16",
-    "sails-disk": "~0.9.0"
+    "sails-disk": "~0.9.0",
+    "xml2js": "^0.4.4"
   },
   "scripts": {
     "postinstall": "bower install",

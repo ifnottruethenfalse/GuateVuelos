@@ -1,0 +1,31 @@
+<material-dialog>
+  <div class="dialog-content">
+    <form style="padding-left: 20px;" name="addAirline">
+      <span ng-show="wrongCode" style="color:red;">Codigo existente</span>
+      <material-input-group ng-class="{'material-input-group-theme-red':addAirline.codigo.$dirty && addAirline.codigo.$invalid}" class="material-input-group-theme-light">
+        <label for="c">Codigo</label>
+        <material-input id="c" name="codigo" type="text" ng-model="codigo" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group ng-class="{'material-input-group-theme-red':addAirline.nombre.$dirty && addAirline.nombre.$invalid}" class="material-input-group-theme-light">
+        <label for="nombre">Nombre</label>
+        <material-input id="nombre" name="nombre" type="text" ng-model="nombre" style="width:100%;" ng-pattern="/^[a-zA-Z0-9]*[a-zA-Z]+[a-zA-Z0-9]*$/" required>
+      </material-input-group>
+      <material-input-group ng-class="{'material-input-group-theme-red':addAirline.host.$dirty && addAirline.host.$invalid}" class="material-input-group-theme-light">
+        <label for="host">Host</label>
+        <material-input id="host" name="host" type="text" ng-model="host" style="width:100%;" required>
+      </material-input-group>
+      <material-input-group ng-class="{'material-input-group-theme-red':addAirline.ext.$dirty && addAirline.ext.$invalid}" class="material-input-group-theme-light">
+        <label for="ext">Ext</label>
+        <material-input id="ext" name="ext" type="text" ng-model="ext" style="width:100%;" required>
+      </material-input-group>
+    </form>
+  </div>
+  <div class="dialog-actions" layout="horizontal" layout-align="end">
+    <material-button class="material-button-raised" style="margin-right:20px;" ng-click="close()">
+      Cancelar
+    </material-button>
+    <material-button class="material-button-raised  material-button-colored"  ng-click="add()">
+      Guardar
+    </material-button>
+  </div>
+</material-dialog>
