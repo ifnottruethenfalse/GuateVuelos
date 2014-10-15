@@ -468,8 +468,15 @@ gvApp.controller('autosCtrl',function(){
 gvApp.controller('HotelesCtrl',function(){
   this.products = hoteles;
 });
-gvApp.controller('PackCtrl',function(){
+gvApp.controller('PackCtrl',function($scope){
   this.products = paquetes;
+  this.reservar = function(e){
+    if ($scope.user.login) {
+      //reserva
+    } else {
+      $scope.signIn(e);
+    }
+  }
 });
 gvApp.controller('ToursCtrl',function(){
   this.products = tours;
