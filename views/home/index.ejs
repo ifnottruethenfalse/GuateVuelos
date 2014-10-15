@@ -123,19 +123,74 @@
     <div class="animate-switch" ng-switch-when="1">
       <!-- PAQUETES-->
 
-      {{selectedIndex}}
+     <div ng-controller="PackCtrl as packs">
+          <li ng-repeat="products in packs.products">
+            <material-card style="background-color: #2ECCFA;">
+              <h4>Paquete</h4>          
+              <blockquote>{{products.promocion}}</blockquote>
+             <h4>Description</h4>
+              <blockquote>{{products.pack}}</blockquote>
+             <h4>Precio</h4>      
+            <blockquote>{{products.price}}</blockquote>
+              <img ng-src="{{products.image}}" />
+            <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-disabled="true">Reservar</material-button>
+          </material-card>
+          </li>
+        </div>
+      </div>
     </div>
     <div class="animate-switch" ng-switch-when="2">
       <!-- HOTELES-->
-      {{selectedIndex}}
+      <div ng-controller="HotelesCtrl as Hoteles">
+          <li ng-repeat="products in Hoteles.products">
+            <material-card style="background-color: #088A85;">
+              <h4>Hotel</h4>          
+              <blockquote>{{products.Hotel}}</blockquote>
+             <h4>Description</h4>
+              <blockquote>{{products.pack}}</blockquote>
+             <h4>Precio</h4>      
+            <blockquote>{{products.price}}</blockquote>
+              <img ng-src="{{products.image}}" />
+            <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-disabled="true">Reservar</material-button>
+          </material-card>
+          </li>
+        </div>
+      </div>
     </div>
     <div class="animate-switch" ng-switch-when="3">
       <!-- TOURS-->
-      {{selectedIndex}}
+        <div ng-controller="ToursCtrl as tours">
+          <li ng-repeat="products in tours.products">
+            <material-card style="background-color: #088A29;">
+              <h4>Tour</h4>          
+              <blockquote>{{products.promocion}}</blockquote>
+             <h4>Description</h4>
+              <blockquote>{{products.pack}}</blockquote>
+             <h4>Precio</h4>      
+            <blockquote>{{products.price}}</blockquote>
+            <img ng-src="{{products.image}}" />
+            <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-disabled="true">Reservar</material-button>
+          </material-card>
+          </li>
+        </div>
+      </div>
     </div>
     <div class="animate-switch" ng-switch-when="4">
       <!-- AUTOS-->
-      {{selectedIndex}}
+      <div ng-controller="autosCtrl as autos">
+        <li ng-repeat="products in autos.products">
+          <material-card style="background-color:#FFFFFF; width: 95%">
+            <h4>Marca</h4>          
+            <blockquote>{{products.marca}}</blockquote>
+           <h4>Description</h4>
+            <blockquote>{{products.pack}}</blockquote>
+           <h4>Precio</h4>      
+          <blockquote>{{products.price}}</blockquote>
+          <img ng-src="{{products.image}}" />
+          <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-disabled="true">Reservar</material-button>
+        </material-card>
+        </li>
+      </div>
     </div>
     <div class="animate-switch" ng-switch-when="5">
       <!-- CONTACTO-->

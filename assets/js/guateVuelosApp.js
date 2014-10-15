@@ -464,34 +464,88 @@ gvApp.controller("superuserAirportCtrl",['$scope','$materialDialog','$http',func
 }]);
 gvApp.controller('autosCtrl',function(){
   this.products = cars;
-  this.cars = [{
+});
+gvApp.controller('HotelesCtrl',function(){
+  this.products = hoteles;
+});
+gvApp.controller('PackCtrl',function(){
+  this.products = paquetes;
+});
+gvApp.controller('ToursCtrl',function(){
+  this.products = tours;
+});
+var cars = [{
               marca: 'Toyota Echo or Similar',
               pack: "Standard Package - Price includes: Unlimited Kilometers, Primary Liability Insurance and Local Taxes.",
               price: 'US$93.13',
-              image: 'assets/images/toyota_echo.jpg'
+              image: 'images/toyota_echo.jpg'
            },
            {
               marca: 'Suzuki Maruti or Similar',
               pack: "Standard package - Price includes unlimited mileage, primary liability insurance and local taxes",
               price: 'US$73.29',
-              image: 'assets/images/suzuki_maruti.jpg'
+              image: 'images/suzuki_maruti.jpg'
            },
            {
               marca: 'Nissan Sentra or Similar',
               pack: "Standard Package - Price includes: Unlimited Kilometers, Primary Liability Insurance and Local Taxes.",
               price: 'US$105.26',
-              image: 'assets/images/sentra_lrg.jpg'
+              image: 'images/sentra_lrg.jpg'
            },
            {
               marca: 'Mitsubishi Lancer or Similar',
               pack: "Standard Package - Price includes: Unlimited Kilometers, Primary Liability Insurance and Local Taxes.",
               price: 'US$121.94',
-              image: 'assets/images/mitsubishi_lancer.jpg'
+              image: 'images/mitsubishi_lancer.jpg'
            }];
-});
-gvApp.controller('hotelesCtrl',function(){
-  this.products = hoteles;
-});
+var hoteles = [{
+              Hotel: 'Silken Al-Andalus Palace',
+              pack: "El Silken Al-Andalus Palace se encuentra a solo 10 minutos en coche del centro histórico de Sevilla. Dispone de gimnasio, salón de belleza, piscina al aire libre, terrazas, jardines y zonas amplias al aire libre para relajarse.",
+              price: 'US$57',
+              image: 'images/sevillahotel.jpg'
+           },
+           {
+              Hotel: 'Park Plaza Westminster Bridge London, Londres ',
+              pack: "El Park Plaza Westminster Bridge London se encuentra frente al Parlamento y el Big Ben, en la ribera sur de Londres. Además, está cerca de la noria London Eye, el acuario, así como diversos restaurantes y teatros.",
+              price: 'US$73.29',
+              image: 'images/London.jpg'
+           },
+           {
+              Hotel: 'La Scelta Di Goethe - Luxury Suites, Roma',
+              pack: "La Scelta Di Goethe - Luxury Suites se encuentra en la importante calle Via del Corso y ofrece un servicio de mayordomo las 24 horas.",
+              price: 'US$1.824',
+              image: 'images/Bellagio.jpg'
+           },
+           {
+              Hotel: 'Adagio Paris Tour Eiffel, París',
+              pack: "Este aparthotel está situado a 20 minutos a pie de la Torre Eiffel y ofrece alojamiento en estudios y apartamentos con aire acondicionado y vistas panorámicas a París, conexión Wi-Fi gratuita, acceso gratuito a una piscina climatizada cubierta y centro de fitness de uso gratuito.",
+              price: 'US$121.94',
+              image: 'images/Paris.jpg'
+           }];
+var tours = [{
+              promocion: 'BlackFriday Panama',
+              pack: "Incluye: Boleto aéreo Guatemala / Panamá / Guatemala. Traslados aeropuerto / Hotel / aeropuerto. Impuestos de salida de Guatemala. Impuestos de salida de Panamá. 03 noches de alojamiento en hotel a elegir con desayuno. Impuestos hoteleros.",
+              price: 'US$544.00',
+              image: 'images/Panama.jpg'
+           },
+           {
+              promocion: 'Charters a Orlando Fin de Año',
+              pack: "Charters a Orlando fin de año 2014, llegando al aeropuerto más eficiente de Florida Central. Con derecho a 3-4 maletas por persona. 8 días, 07 noches. ",
+              price: 'US$ 694.00',
+              image: 'images/orlando.jpg'
+           }];
+var paquetes = [{
+              promocion: 'Habitacion 2 x 1',
+              pack: "En cualquier hotel marriot de cualquier localidad.",
+              price: 'US$30.00',
+              image: 'images/2x1.png'
+           },
+           {
+              promocion: 'Alquila tu carro y obten descuento',
+              pack: "Aplican solo para modelos recientes (2010 en adelante)",
+              price: 'US$40.00',
+              image: 'images/Descuento.png'
+           }];
 
 gvApp.factory('xml2json',function(){
   return {
