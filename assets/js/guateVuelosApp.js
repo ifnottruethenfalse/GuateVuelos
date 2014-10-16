@@ -465,9 +465,22 @@ gvApp.controller("superuserAirportCtrl",['$scope','$materialDialog','$http',func
 }]);
 gvApp.controller('autosCtrl',function($scope){
   this.products = cars;
-  $this.reservar = function(e){
+  this.reservar = function(e){
     if ($scope.user.login) {
       //reserva
+       var params = {
+              username: $scope.username, 
+              description: $scope.description,
+              paquete: $scope.paquete,
+              precio: $scope.precio,
+            }
+            $http.post(
+              '/reservacion',
+              {params: params}
+            ).then(function(response) {
+              $scope.success = true;
+
+            });
     } else {
       $scope.signIn(e);
     }
@@ -478,6 +491,19 @@ gvApp.controller('HotelesCtrl',function($scope){
   this.reservar = function(e){
     if ($scope.user.login) {
       //reserva
+       var params = {
+              username: $scope.username, 
+              description: $scope.description,
+              paquete: $scope.paquete,
+              precio: $scope.precio,
+            }
+            $http.post(
+              '/reservacion',
+              {params: params}
+            ).then(function(response) {
+              $scope.success = true;
+
+            });
     } else {
       $scope.signIn(e);
     }
@@ -510,6 +536,19 @@ gvApp.controller('ToursCtrl',function($scope){
   this.reservar = function(e){
     if ($scope.user.login) {
       //reserva
+       var params = {
+              username: $scope.username, 
+              description: $scope.description,
+              paquete: $scope.paquete,
+              precio: $scope.precio,
+            }
+            $http.post(
+              '/reservacion',
+              {params: params}
+            ).then(function(response) {
+              $scope.success = true;
+
+            });
     } else {
       $scope.signIn(e);
     }
