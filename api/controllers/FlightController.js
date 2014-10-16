@@ -41,8 +41,8 @@ module.exports = {
           console.log(url);
           http.get(url, function(response) {
             console.log("Got response: ");
-            response.on('data', function (chunk) {
-              console.log('BODY: ' + chunk);
+            response.on('data', function (r) {
+              console.log('BODY: ' + r);
               //if (info.xml) {
                 /*var xml = res.data.lista_vuelos,
                 dom = xml2json.parseXml(xml),
@@ -55,8 +55,12 @@ module.exports = {
               //  if (chunk.lista_vuelos) {
               //    respuesta.push(chunk.lista_vuelos);  
               //  }
+                var chunk = eval(r);
+                res.send(chunk);
                 if (chunk.lista_vuelos) {
+                  console.log(chunk);
                   respuesta.push(chunk.lista_vuelos);  
+                  res.send(respuesta);
                 }  
               });
               
@@ -64,7 +68,7 @@ module.exports = {
                 asycFor(i+1);
               } else {
                 console.log(respuesta);
-                res.send(respuesta);
+                //res.send(respuesta);
               }
           }).on('error', function(e) {
             console.log("Got error: " + e.message);

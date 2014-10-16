@@ -63,15 +63,15 @@
               <td>{{800.00 | currency}}</td>
             </tr>
             <tr>
-              <td>Guate</td>
+              <td>Chinautla</td>
               <td>{{500.00 | currency}}</td>
             </tr>
             <tr>
-              <td>Guate</td>
+              <td>Nahuala</td>
               <td>{{500.00 | currency}}</td>
             </tr>
             <tr>
-              <td>Guate</td>
+              <td>Pachuca</td>
               <td>{{500.00 | currency}}</td>
             </tr>
           </table>
@@ -114,26 +114,26 @@
               <option ng-repeat="place in places" ng-show="origen != place.id" value="{{place.id}}">{{place.name}}</option>
           </select>
           <material-input-group class="material-input-group-theme-light material-input-group-inverted" ng-class="{'material-input-has-value':fecha}">
-            <material-input name="fecha" id="fecha" ui-date="{minDate:0}" type="text" ng-model="fecha" style="width:100%;margin-top: 20px;" placeholder="Fecha" ng-required="true">
+            <material-input name="fecha" id="fecha" ui-date type="text" ng-model="fecha" style="width:100%;margin-top: 20px;" placeholder="Fecha" ng-required="true">
           </material-input-group>
           <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-disabled="search.$error.required || search.fecha.$error.required" ng-click="searchFlight($event)">Buscar</material-button>
         </form>
       </material-card>
     </div>
     <div class="animate-switch" ng-switch-when="1">
-      {{selectedIndex}}
+      <h1>Paquetes</h1>
     </div>
     <div class="animate-switch" ng-switch-when="2">
-      {{selectedIndex}}
+      <h1>Hoteles</h1>
     </div>
     <div class="animate-switch" ng-switch-when="3">
-      {{selectedIndex}}
+      <h1>Tours</h1>
     </div>
     <div class="animate-switch" ng-switch-when="4">
-      {{selectedIndex}}
+      <h1>Autos</h1>
     </div>
     <div class="animate-switch" ng-switch-when="5">
-      {{selectedIndex}}
+      <h1 style="color:black;">Contacto</h1>
     </div>
     <div class="animate-switch" ng-switch-when="6" ng-controller="superuserCtrl" layout="vertical">
       <div layout="horizontal" style="width:100%;">

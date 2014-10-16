@@ -175,37 +175,7 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
         $scope.origen=info.origen;
         $scope.destino=info.destino;
         $scope.fecha=info.fecha;
-        $scope.flightLists = [];/*{
-          aerolinea: "Taca",
-          vuelo: [{
-            numero: "1",
-            fecha: "20140930",
-            origen: "Totonicapan",
-            destino: "Condado",
-            hora: "14:00",
-            precio: "200.00",
-            status: "1"
-          },{
-            numero: "2",
-            fecha: "20140930",
-            origen: "Totonicapan",
-            destino: "Condado",
-            hora: "19:00",
-            precio: "100.00",
-            status: "2"
-          }]
-        },{
-          aerolinea : "American",
-          vuelo: [{
-            numero: "2",
-            fecha: "20140930",
-            origen: "Totonicapan",
-            destino: "Condado",
-            hora: "11:00",
-            precio: "500.00",
-            status: "3"
-          }]
-        }];*/
+        $scope.flightLists = [];
         Date.prototype.yyyymmdd = function() {
          var yyyy = this.getFullYear().toString();
          var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
@@ -224,9 +194,10 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
           '/searchflight',
           {params: params}
         ).then(function(response) {
-          $scope.flightLists = response.data;
-          $scope.onSearch = false;
           console.log(response.data);
+          $scope.flightLists[0] = response.data.lista_vuelos;
+          $scope.onSearch = false;
+          //console.log(response.data);
           
         });
         $scope.reserve = function (vuelo, airline) {

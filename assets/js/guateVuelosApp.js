@@ -186,6 +186,7 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
           '/searchflight',
           {params: params}
         ).then(function(response) {
+          console.log(response);
           $scope.onSearch = false;
         });
         $scope.close = function() {
