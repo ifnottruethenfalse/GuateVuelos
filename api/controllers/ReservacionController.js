@@ -1,5 +1,5 @@
 /**
- * SupportController
+ * ReservacionController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -16,10 +16,6 @@
  */
 var pg = require("pg");
 module.exports = {
-  /**
-   * Action blueprints:
-   *    `/support/add`
-   */
    add: function (req, res) {
     var info = req.body.params;
     var conString = "pg://postgres:cris12345@localhost:5432/GuateVuelos";
@@ -28,7 +24,7 @@ module.exports = {
       if(err) {
         return console.error('could not connect to postgres', err);
       }
-      var query = client.query("INSERT INTO SUPPORT VALUES('"+info.name+"','"+info.description+"');", function(err, result) {
+      var query = client.query("INSERT INTO RESERVACION VALUES('"+info.username+"','"+info.description+"','"+info.paquete+"','"+info.precio+"');", function(err, result) {
         if(err) {
           return console.error('error running query', err);
         }
@@ -42,4 +38,5 @@ module.exports = {
       });
     // Send a JSON response
   }
+  
 };

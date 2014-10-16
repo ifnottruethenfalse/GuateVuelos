@@ -63,4 +63,16 @@ CREATE TABLE AIRPORT(
 	name varchar,
 	PRIMARY KEY(id)
 );
+CREATE TABLE SUPPORT(
+	name varchar,
+	description varchar
+
+);
+CREATE TABLE RESERVACION(
+	username varchar,
+	description varchar,
+	paquete varchar,
+	precio varchar
+
+);
 INSERT INTO usuarios VALUES(0,'superuser','cris12345','cristhian','morales','1234567890','0123456789012345','cristhian@gmail.com',true) /* Para ingresar el superuser */

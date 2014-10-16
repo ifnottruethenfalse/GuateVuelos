@@ -23,7 +23,7 @@ module.exports = {
            res.json({state:0});
         }
         else{
-          client.query("INSERT INTO USUARIOS VALUES('"+info.nit+"','"+info.username+"','"+info.name+"', '"+info.lastName+"', '"+info.documento+"', '"+info.tarjeta+"', '"+info.email+"', false)" ,function(err, result) {
+          client.query("INSERT INTO USUARIOS VALUES('"+info.nit+"','"+info.username+"','"+info.password+"','"+info.name+"', '"+info.lastName+"', '"+info.documento+"', '"+info.tarjeta+"', '"+info.email+"', false)" ,function(err, result) {
             if(err) {
               return console.error('error running query', err);
             }

@@ -463,14 +463,18 @@ gvApp.controller("superuserAirportCtrl",['$scope','$materialDialog','$http',func
   }
 
 }]);
-gvApp.controller('autosCtrl',function(){
+gvApp.controller('autosCtrl',function($scope){
   this.products = cars;
+  $this.reservar = function(e){
+    if ($scope.user.login) {
+      //reserva
+    } else {
+      $scope.signIn(e);
+    }
+  }
 });
-gvApp.controller('HotelesCtrl',function(){
+gvApp.controller('HotelesCtrl',function($scope){
   this.products = hoteles;
-});
-gvApp.controller('PackCtrl',function($scope){
-  this.products = paquetes;
   this.reservar = function(e){
     if ($scope.user.login) {
       //reserva
@@ -479,8 +483,54 @@ gvApp.controller('PackCtrl',function($scope){
     }
   }
 });
-gvApp.controller('ToursCtrl',function(){
+gvApp.controller('PackCtrl',function($scope, $http){
+  this.products = paquetes;
+  this.reservar = function(e){
+    if ($scope.user.login) {
+      var params = {
+              username: $scope.username, 
+              description: $scope.description,
+              paquete: $scope.paquete,
+              precio: $scope.precio,
+            }
+            $http.post(
+              '/reservacion',
+              {params: params}
+            ).then(function(response) {
+              $scope.success = true;
+
+            });
+    } else {
+      $scope.signIn(e);
+    }
+  }
+});
+gvApp.controller('ToursCtrl',function($scope){
   this.products = tours;
+  this.reservar = function(e){
+    if ($scope.user.login) {
+      //reserva
+    } else {
+      $scope.signIn(e);
+    }
+  }
+});
+gvApp.controller('SupportCtrl',function($scope, $http){
+  $scope.add = function () {
+          if($scope.support.$valid) {
+            var params = {
+              name: $scope.name, 
+              description: $scope.description,
+            }
+            $http.post(
+              '/support',
+              {params: params}
+            ).then(function(response) {
+              $scope.success = true;
+
+            });
+          }
+  }
 });
 var cars = [{
               marca: 'Toyota Echo or Similar',

@@ -196,11 +196,9 @@
       <!-- CONTACTO-->
       <material-toolbar class="material-theme-dark">
       <span class="material-flex">Atencion al Cliente</span>
-    </material-toolbar>
-      <material-content class="material-content-padding" style="height: 1000px;">
+      </material-toolbar>
+      <material-content class="material-content-padding" style="height: 1000px;" layout="horizontal">
       <material-card style="width: 50%;height:600px; background-color:#119957;margin-right:25px;">
-      <p>Si aún no has realizado tu reservación y tienes dudas al respecto, consulta las diferentes secciones del menú de la izquierda para encontrar las respuestas.
-        Hemos incluido una serie de preguntas y respuestas que puedes consultar en el apartado de “Consultas frecuentes”.</p>
       <p>Nota: si necesitas comunicarte para cancelar tu reservación, recuerda que sólo atendemos las consultas correspondientes a clientes que hayan realizado reservaciones a través de los sitios web de eDreams o de nuestro Centro telefónico.</p>
       <p>Las reservaciones por teléfono tienen un recargo adicional de 15$.</p>
       <p>Contacto telefónico
@@ -210,7 +208,22 @@
        
       <h1>Si estás fuera del país llama al  +1 502 4920535</h1>
     </material-card>
-
+    <material-card ng-controller="SupportCtrl" style="width: 50%;height:600px; background-color:#119957;margin-right:25px;">
+      <h1 ng-show="success">Se hizo con exito su consulta.</h1>
+        <form  style="padding-left: 20px;" name="support" id="support">
+          <material-input-group ng-class="{'material-input-group-theme-red':support.name.$invalid}" class="material-input-group-theme-light">
+            <label for="name">Nombre</label>
+            <material-input id="name" name="name" type="text" ng-model="name" style="width:100%;" required>
+          </material-input-group>
+          <material-input-group ng-class="{'material-input-group-theme-red':support.description.$invalid}" class="material-input-group-theme-light">
+            <label for="description">Descripcion</label>
+            <material-input id="description" name="description" type="text" ng-model="description" style="width:100%;" required>
+          </material-input-group>
+          <material-button class="material-button-raised  material-button-colored"  ng-click="add()">
+              Enviar
+          </material-button>
+        </form>
+    </material-card>
     </material-content>
     </div>
     <div class="animate-switch" ng-switch-when="6" ng-controller="superuserCtrl" layout="vertical">

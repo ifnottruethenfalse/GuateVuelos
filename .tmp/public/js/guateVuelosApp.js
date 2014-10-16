@@ -168,10 +168,6 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
       },
       controller: ['$scope', '$hideDialog','$http','info', function($scope, $hideDialog, $http, info) {
         $scope.onSearch = true;
-        $scope.origen=info.origen;
-        $scope.destino=info.destino;
-        $scope.fecha=info.fecha;
-        $scope.flightLists = [];
         Date.prototype.yyyymmdd = function() {
          var yyyy = this.getFullYear().toString();
          var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
@@ -189,11 +185,8 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
           '/searchflight',
           {params: params}
         ).then(function(response) {
-          console.log(response.data);
-          $scope.flightLists[0] = response.data.lista_vuelos;
+          console.log(response);
           $scope.onSearch = false;
-          //console.log(response.data);
-       
         });
         $scope.close = function() {
           $hideDialog();
@@ -470,9 +463,9 @@ gvApp.controller("superuserAirportCtrl",['$scope','$materialDialog','$http',func
   }
 
 }]);
-gvApp.controller('autosCtrl',function(){
+gvApp.controller('autosCtrl',function($scope){
   this.products = cars;
-  this.reservar = function(e){
+  $this.reservar = function(e){
     if ($scope.user.login) {
       //reserva
     } else {
@@ -480,7 +473,7 @@ gvApp.controller('autosCtrl',function(){
     }
   }
 });
-gvApp.controller('HotelesCtrl',function(){
+gvApp.controller('HotelesCtrl',function($scope){
   this.products = hoteles;
   this.reservar = function(e){
     if ($scope.user.login) {
@@ -490,8 +483,30 @@ gvApp.controller('HotelesCtrl',function(){
     }
   }
 });
-gvApp.controller('PackCtrl',function($scope){
+gvApp.controller('PackCtrl',function($scope, $http){
   this.products = paquetes;
+  this.reservar = function(e){
+    if ($scope.user.login) {
+      var params = {
+              username: $scope.username, 
+              description: $scope.description,
+              paquete: $scope.paquete,
+              precio: $scope.precio,
+            }
+            $http.post(
+              '/reservacion',
+              {params: params}
+            ).then(function(response) {
+              $scope.success = true;
+
+            });
+    } else {
+      $scope.signIn(e);
+    }
+  }
+});
+gvApp.controller('ToursCtrl',function($scope){
+  this.products = tours;
   this.reservar = function(e){
     if ($scope.user.login) {
       //reserva
@@ -500,14 +515,21 @@ gvApp.controller('PackCtrl',function($scope){
     }
   }
 });
-gvApp.controller('ToursCtrl',function(){
-  this.products = tours;
-  this.reservar = function(e){
-    if ($scope.user.login) {
-      //reserva
-    } else {
-      $scope.signIn(e);
-    }
+gvApp.controller('SupportCtrl',function($scope, $http){
+  $scope.add = function () {
+          if($scope.support.$valid) {
+            var params = {
+              name: $scope.name, 
+              description: $scope.description,
+            }
+            $http.post(
+              '/support',
+              {params: params}
+            ).then(function(response) {
+              $scope.success = true;
+
+            });
+          }
   }
 });
 var cars = [{
