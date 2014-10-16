@@ -47,6 +47,7 @@ module.exports.routes = {
   'post /addairport' : 'AirportController.add',
   'post /editairport' : 'AirportController.edit',
   'post /deleteairport' : 'AirportController.delete',
+  'post /support' : 'SupportController.add',
 
 
 

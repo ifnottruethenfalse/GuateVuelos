@@ -121,19 +121,97 @@
       </material-card>
     </div>
     <div class="animate-switch" ng-switch-when="1">
-      <h1>Paquetes</h1>
+      <!-- PAQUETES-->
+
+     <div ng-controller="PackCtrl as packs">
+          <li ng-repeat="products in packs.products">
+            <material-card style="background-color: #2ECCFA;">
+              <h4>Paquete</h4>          
+              <blockquote>{{products.promocion}}</blockquote>
+             <h4>Description</h4>
+              <blockquote>{{products.pack}}</blockquote>
+             <h4>Precio</h4>      
+            <blockquote>{{products.price}}</blockquote>
+              <img ng-src="{{products.image}}" />
+            <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="packs.reservar($event)">Reservar</material-button>
+          </material-card>
+          </li>
+        </div>
+      </div>
     </div>
     <div class="animate-switch" ng-switch-when="2">
-      <h1>Hoteles</h1>
+      <!-- HOTELES-->
+      <div ng-controller="HotelesCtrl as Hoteles">
+          <li ng-repeat="products in Hoteles.products">
+            <material-card style="background-color: #088A85;">
+              <h4>Hotel</h4>          
+              <blockquote>{{products.Hotel}}</blockquote>
+             <h4>Description</h4>
+              <blockquote>{{products.pack}}</blockquote>
+             <h4>Precio</h4>      
+            <blockquote>{{products.price}}</blockquote>
+              <img ng-src="{{products.image}}" />
+            <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="Hoteles.reservar($event)">Reservar</material-button>
+          </material-card>
+          </li>
+        </div>
+      </div>
     </div>
     <div class="animate-switch" ng-switch-when="3">
-      <h1>Tours</h1>
+      <!-- TOURS-->
+        <div ng-controller="ToursCtrl as tours">
+          <li ng-repeat="products in tours.products">
+            <material-card style="background-color: #088A29;">
+              <h4>Tour</h4>          
+              <blockquote>{{products.promocion}}</blockquote>
+             <h4>Description</h4>
+              <blockquote>{{products.pack}}</blockquote>
+             <h4>Precio</h4>      
+            <blockquote>{{products.price}}</blockquote>
+            <img ng-src="{{products.image}}" />
+            <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="tours.reservar($event)">Reservar</material-button>
+          </material-card>
+          </li>
+        </div>
+      </div>
     </div>
     <div class="animate-switch" ng-switch-when="4">
-      <h1>Autos</h1>
+      <!-- AUTOS-->
+      <div ng-controller="autosCtrl as autos" class="fonts">
+        <li ng-repeat="products in autos.products">
+          <material-card style="background-color:#FFFFFF; width: 95%;color:black !important;">
+            <h4>Marca</h4>          
+            <blockquote>{{products.marca}}</blockquote>
+           <h4>Description</h4>
+            <blockquote>{{products.pack}}</blockquote>
+           <h4>Precio</h4>      
+          <blockquote>{{products.price}}</blockquote>
+          <img ng-src="{{products.image}}" />
+          <material-button style="margin-top: 25px;float: right;" class="material-button-raised material-button-colored" ng-click="autos.reservar($event)">Reservar</material-button>
+        </material-card>
+        </li>
+      </div>
     </div>
     <div class="animate-switch" ng-switch-when="5">
-      <h1 style="color:black;">Contacto</h1>
+      <!-- CONTACTO-->
+      <material-toolbar class="material-theme-dark">
+      <span class="material-flex">Atencion al Cliente</span>
+    </material-toolbar>
+      <material-content class="material-content-padding" style="height: 1000px;">
+      <material-card style="width: 50%;height:600px; background-color:#119957;margin-right:25px;">
+      <p>Si aún no has realizado tu reservación y tienes dudas al respecto, consulta las diferentes secciones del menú de la izquierda para encontrar las respuestas.
+        Hemos incluido una serie de preguntas y respuestas que puedes consultar en el apartado de “Consultas frecuentes”.</p>
+      <p>Nota: si necesitas comunicarte para cancelar tu reservación, recuerda que sólo atendemos las consultas correspondientes a clientes que hayan realizado reservaciones a través de los sitios web de eDreams o de nuestro Centro telefónico.</p>
+      <p>Las reservaciones por teléfono tienen un recargo adicional de 15$.</p>
+      <p>Contacto telefónico
+      <p>Si por algún motivo tu duda no ha sido resuelta, agradeceríamos que te pongas en contacto con eDreams a través de nuestro <h2>teléfono: +1 (646) 328 4545 </h2>
+      Nuevo: Ahora abierto 24 horas al día!</p>
+      <h1>We speak English too! Call +1 800 3288 4545</h1>
+       
+      <h1>Si estás fuera del país llama al  +1 502 4920535</h1>
+    </material-card>
+
+    </material-content>
     </div>
     <div class="animate-switch" ng-switch-when="6" ng-controller="superuserCtrl" layout="vertical">
       <div layout="horizontal" style="width:100%;">

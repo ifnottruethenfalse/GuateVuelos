@@ -1816,7 +1816,7 @@ material-divider {
 
 material-checkbox {
   display: block;
-  margin: 5px;
+  margin: 15px;
   white-space: nowrap;
   cursor: pointer; }
   material-checkbox input {

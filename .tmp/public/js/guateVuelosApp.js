@@ -1,9 +1,5 @@
 var gvApp = angular.module("gvApp", ["ngMaterial","ui.date",'ui.mask','ui.select2']); // array is require
 
-gvApp.config(function($httpProvider){
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-});
-
 gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', function ($scope,$materialDialog,$http,xml2json){
   $scope.selectedIndex = 0;
   $scope.user={
@@ -145,17 +141,17 @@ gvApp.controller("gvAppCtrl",['$scope','$materialDialog','$http','xml2json', fun
     });
   };
 }]);
-
 gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($scope,$http,$materialDialog){
   $scope.places = [];
   $http.post(
       'getairport'
     ).then(function(response) {
-      $scope.places = response.data;
-      console.log($scope.places);
+      for (var i = 0; i < response.data.length; i++) {
+        $scope.places.push(response.data[i].place);
+      }
     });
   $scope.$on('newAirport',function(event,airline){
-    $scope.places.push(airline);
+    $scope.places.push(airline.place);
     console.log($scope.places);
   });
   $scope.searchFlight = function(e) { 
@@ -170,7 +166,7 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
           xml: $scope.xml
         }      
       },
-      controller: ['$scope', '$hideDialog','$http','info','$materialDialog', function($scope, $hideDialog, $http, info,$materialDialog) {
+      controller: ['$scope', '$hideDialog','$http','info', function($scope, $hideDialog, $http, info) {
         $scope.onSearch = true;
         $scope.origen=info.origen;
         $scope.destino=info.destino;
@@ -183,14 +179,13 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
          return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
         };
         var f = info.fecha.yyyymmdd();
-        var type = !info.xml? "XML" : "JSON";
         var params = {
-          origen: info.origen.trim(), 
-          destino: info.destino.trim(),
-          fecha: f.trim(),
-          type: type.trim()
+          origen: info.origen, 
+          destino: info.destino,
+          fecha: f,
+          xml: info.xml
         };
-        $http.post(
+        return $http.post(
           '/searchflight',
           {params: params}
         ).then(function(response) {
@@ -198,74 +193,13 @@ gvApp.controller("billetCtrl",['$scope','$http','$materialDialog', function ($sc
           $scope.flightLists[0] = response.data.lista_vuelos;
           $scope.onSearch = false;
           //console.log(response.data);
-          
+       
         });
-        $scope.reserve = function (vuelo, airline) {
+        $scope.close = function() {
           $hideDialog();
-          $materialDialog({
-            templateUrl: 'partials/airplane.html',
-            targetEvent: e,
-            locals: {
-              vuelo: vuelo,
-              airline: airline
-            },
-            controller: ['$scope', '$hideDialog','$http','$materialDialog','vuelo','airline', function($scope, $hideDialog, $http,$materialDialog,vuelo,airline) {
-              var params = {
-                vuelo: vuelo.numero,
-                type: airline.type
-              };
-              $scope.asientos = [];
-              $scope.selected = -1;
-              $http({headers:{
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-                    'X-Random-Shit':'123123123'
-                },url:"http://"+airline.host+"/script_lista_asientos."+airline.ext,params: params,method:'GET'}
-                ).then(function(res) {
-                  console.log("Got response: ");
-                  console.log(res.data);
-                  var info;
-                  if (info.xml) {
-                    var xml = res.data.lista_vuelos,
-                    dom = xml2json.parseXml(xml),
-                    json = xml2json.xml2json(dom);
-                    info = json.lista_asientos;
-                  } else {
-                    info = res.data.lista_asientos;
-                  }
-                  var l = parseInt(info.filas);
-                  for (var i = 0;i < l;i++) {
-                    if (info.asiento[i].numero == (i+1)) {
-                      asientos[i].value = false;
-                      asientos[i].ocupado = false; 
-                    } else {
-                      asientos[i].value = true;
-                      asientos[i].ocupado = true;
-                    } 
-                  }
-                }, function (err) {
-                  console.log(err);
-                });
-              $scope.select = function (i) {
-                if ($scope.selected == -1) {
-                  $scope.selected = i;
-                } else {
-                  if (selected != i) { 
-                      $scope.asientos[selected].value = false; 
-                      $scope.selected = i;
-                  } else {
-                    if (!$scope.asientos[selected].value) {
-                      $scope.selected = -1;
-                    }
-                  }
-                }
-              }
-              $scope.reserve = function () {
-                //
-              }
-            }]
-          });
+        };
+        $scope.next = function () {
+          
         }
       }]
     });
@@ -319,9 +253,7 @@ gvApp.controller("superuserCtrl",['$scope','$materialDialog','$http',function ($
           $hideDialog();
         };
         $scope.add = function () {
-          console.log("add");
           if($scope.addAirline.$valid) {
-            console.log("add valid");
             var params = {
               codigo: $scope.codigo, 
               nombre: $scope.nombre,
@@ -538,6 +470,118 @@ gvApp.controller("superuserAirportCtrl",['$scope','$materialDialog','$http',func
   }
 
 }]);
+gvApp.controller('autosCtrl',function(){
+  this.products = cars;
+  this.reservar = function(e){
+    if ($scope.user.login) {
+      //reserva
+    } else {
+      $scope.signIn(e);
+    }
+  }
+});
+gvApp.controller('HotelesCtrl',function(){
+  this.products = hoteles;
+  this.reservar = function(e){
+    if ($scope.user.login) {
+      //reserva
+    } else {
+      $scope.signIn(e);
+    }
+  }
+});
+gvApp.controller('PackCtrl',function($scope){
+  this.products = paquetes;
+  this.reservar = function(e){
+    if ($scope.user.login) {
+      //reserva
+    } else {
+      $scope.signIn(e);
+    }
+  }
+});
+gvApp.controller('ToursCtrl',function(){
+  this.products = tours;
+  this.reservar = function(e){
+    if ($scope.user.login) {
+      //reserva
+    } else {
+      $scope.signIn(e);
+    }
+  }
+});
+var cars = [{
+              marca: 'Toyota Echo or Similar',
+              pack: "Standard Package - Price includes: Unlimited Kilometers, Primary Liability Insurance and Local Taxes.",
+              price: 'US$93.13',
+              image: 'images/toyota_echo.jpg'
+           },
+           {
+              marca: 'Suzuki Maruti or Similar',
+              pack: "Standard package - Price includes unlimited mileage, primary liability insurance and local taxes",
+              price: 'US$73.29',
+              image: 'images/suzuki_maruti.jpg'
+           },
+           {
+              marca: 'Nissan Sentra or Similar',
+              pack: "Standard Package - Price includes: Unlimited Kilometers, Primary Liability Insurance and Local Taxes.",
+              price: 'US$105.26',
+              image: 'images/sentra_lrg.jpg'
+           },
+           {
+              marca: 'Mitsubishi Lancer or Similar',
+              pack: "Standard Package - Price includes: Unlimited Kilometers, Primary Liability Insurance and Local Taxes.",
+              price: 'US$121.94',
+              image: 'images/mitsubishi_lancer.jpg'
+           }];
+var hoteles = [{
+              Hotel: 'Silken Al-Andalus Palace',
+              pack: "El Silken Al-Andalus Palace se encuentra a solo 10 minutos en coche del centro histórico de Sevilla. Dispone de gimnasio, salón de belleza, piscina al aire libre, terrazas, jardines y zonas amplias al aire libre para relajarse.",
+              price: 'US$57',
+              image: 'images/sevillahotel.jpg'
+           },
+           {
+              Hotel: 'Park Plaza Westminster Bridge London, Londres ',
+              pack: "El Park Plaza Westminster Bridge London se encuentra frente al Parlamento y el Big Ben, en la ribera sur de Londres. Además, está cerca de la noria London Eye, el acuario, así como diversos restaurantes y teatros.",
+              price: 'US$73.29',
+              image: 'images/London.jpg'
+           },
+           {
+              Hotel: 'La Scelta Di Goethe - Luxury Suites, Roma',
+              pack: "La Scelta Di Goethe - Luxury Suites se encuentra en la importante calle Via del Corso y ofrece un servicio de mayordomo las 24 horas.",
+              price: 'US$1.824',
+              image: 'images/Bellagio.jpg'
+           },
+           {
+              Hotel: 'Adagio Paris Tour Eiffel, París',
+              pack: "Este aparthotel está situado a 20 minutos a pie de la Torre Eiffel y ofrece alojamiento en estudios y apartamentos con aire acondicionado y vistas panorámicas a París, conexión Wi-Fi gratuita, acceso gratuito a una piscina climatizada cubierta y centro de fitness de uso gratuito.",
+              price: 'US$121.94',
+              image: 'images/Paris.jpg'
+           }];
+var tours = [{
+              promocion: 'BlackFriday Panama',
+              pack: "Incluye: Boleto aéreo Guatemala / Panamá / Guatemala. Traslados aeropuerto / Hotel / aeropuerto. Impuestos de salida de Guatemala. Impuestos de salida de Panamá. 03 noches de alojamiento en hotel a elegir con desayuno. Impuestos hoteleros.",
+              price: 'US$544.00',
+              image: 'images/Panama.jpg'
+           },
+           {
+              promocion: 'Charters a Orlando Fin de Año',
+              pack: "Charters a Orlando fin de año 2014, llegando al aeropuerto más eficiente de Florida Central. Con derecho a 3-4 maletas por persona. 8 días, 07 noches. ",
+              price: 'US$ 694.00',
+              image: 'images/orlando.jpg'
+           }];
+var paquetes = [{
+              promocion: 'Habitacion 2 x 1',
+              pack: "En cualquier hotel marriot de cualquier localidad.",
+              price: 'US$30.00',
+              image: 'images/2x1.png'
+           },
+           {
+              promocion: 'Alquila tu carro y obten descuento',
+              pack: "Aplican solo para modelos recientes (2010 en adelante)",
+              price: 'US$40.00',
+              image: 'images/Descuento.png'
+           }];
 
 gvApp.factory('xml2json',function(){
   return {
